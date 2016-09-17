@@ -1,0 +1,4 @@
+Room table - RoomID, BuildingID, RoomNumber
+Booking table - BookingID, RoomID, UserID, Date, TimeFrom, TimeTo
+Admin - AdminID, Name, EmailID, Phone, Username, Password
+User - UserID, Name, EmailID, Phone, Username, Password

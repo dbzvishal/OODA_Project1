@@ -1,3 +1,4 @@
 class Room < ApplicationRecord
-  belongs_to :building
+  belongs_to :buildings
+  has_many :bookings
 end

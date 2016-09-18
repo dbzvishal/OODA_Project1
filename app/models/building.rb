@@ -1,3 +1,3 @@
 class Building < ApplicationRecord
-  has_many :room
+  has_many :rooms
 end

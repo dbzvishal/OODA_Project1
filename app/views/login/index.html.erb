@@ -1,4 +1,3 @@
-
 <%= form_for @users, :url => {:action => 'show'} do |f| %>
     <% if flash[:alert]%>
       <p id="notice"><%= flash[:alert] %></p>
@@ -15,3 +14,5 @@
     <br />
     <%= f.submit 'Log In'%>
 <% end %>
+<br />
+<%= button_to 'Register', add_user_path, :method => 'get' %>

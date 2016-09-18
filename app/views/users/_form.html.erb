@@ -1,4 +1,4 @@
-<%= form_for(user) do |f| %>
+<%= form_for user, :url => {:action => 'create'} do |f| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -12,26 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :uname %>
+    <%= f.label :Username%>
     <%= f.text_field :uname %>
   </div>
 
   <div class="field">
-    <%= f.label :uemail %>
+    <%= f.label :Email %>
     <%= f.text_field :uemail %>
   </div>
 
   <div class="field">
-    <%= f.label :uphone %>
-    <%= f.number_field :uphone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.text_field :password %>
+    <%= f.label :Password %>
+    <%= f.password_field :password %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit' %>
   </div>
 <% end %>

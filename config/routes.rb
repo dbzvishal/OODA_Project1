@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get '/login', to: 'login#index', as: 'login'
   # Submit page
   post '/login', to: 'login#show'
+
+  # User Creation page
+  get '/users/new', to: 'users#new', as: 'add_user'
+  # Submit User Info
+  post '/users/create', to: 'users#create', as: 'create_user'
+
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'
 

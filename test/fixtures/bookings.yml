@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-09-17
+  timefrom: 2016-09-17 20:03:37
+  timeto: 2016-09-17 20:03:37
+
+two:
+  date: 2016-09-17
+  timefrom: 2016-09-17 20:03:37
+  timeto: 2016-09-17 20:03:37

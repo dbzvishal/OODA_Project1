@@ -3,19 +3,15 @@
   <head>
     <title>OODAProject1</title>
     <%= csrf_meta_tags %>
-    <h3 id='logout' name='logout' style="text-align: right; color: blue">
-      <%= link_to 'Logout', logout_path %>
-    </h3>
+    <% unless session[:user_id].nil? %>
+      <h3 id='logout' name='logout' style="text-align: right; color: blue">
+        <%= link_to 'Logout', logout_path %>
+      </h3>
+    <% end %>
   </head>
 
   <body>
     <%= yield %>
   </body>
 </html>
-
-<script typ="text/javascript">
-  if (window.location.pathname=='/logout' || window.location.pathname=='/login' || window.location.pathname=="/")
-  {
-    element = document.getElementById('logout').style.display = 'none';
-  }
 </script>

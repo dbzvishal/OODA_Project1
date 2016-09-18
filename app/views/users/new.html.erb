@@ -1,5 +1,9 @@
 <h1>New User</h1>
 
+<% if flash[:alert]%>
+    <p id="notice"><%= flash[:alert] %></p>
+<%end%>
+
 <%= render 'form', user: @user %>
 <br />
-<%= link_to 'Back', login_path %>
+<%= button_to 'Back', login_path, :method => 'get' %>

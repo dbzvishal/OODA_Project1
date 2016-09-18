@@ -1,3 +1,5 @@
+<h1>Login</h1>
+
 <%= form_for @users, :url => {:action => 'show'} do |f| %>
     <% if flash[:alert]%>
       <p id="notice"><%= flash[:alert] %></p>
@@ -5,7 +7,7 @@
     <br />
     <table>
       <tr>
-        <td>Username: </td><td><%= f.text_field :uname %> </td>
+        <td>Username/Email: </td><td><%= f.text_field :uname %> </td>
       </tr>
       <tr>
         <td>Password: </td><td><%= f.password_field :pass %></td>

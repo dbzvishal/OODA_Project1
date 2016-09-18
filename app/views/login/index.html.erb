@@ -1,13 +1,15 @@
-<html>
-<head>
-  <title>Login</title>
-</head>
 
 <%= form_for @users, :url => {:action => 'show'} do |f| %>
-
-    Username: <%= f.text_field :uname %> <br />
-    Password: <%= f.password_field :password %><br /><br />
-
+    <p id="notice"><%= notice %></p>
+    <br />
+    <table>
+      <tr>
+        <td>Username: </td><td><%= f.text_field :uname %> </td>
+      </tr>
+      <tr>
+        <td>Password: </td><td><%= f.password_field :pass %></td>
+      </tr>
+    </table>
+    <br />
     <%= f.submit 'Log In'%>
 <% end %>
-</html>

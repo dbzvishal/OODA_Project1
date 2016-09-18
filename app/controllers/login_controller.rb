@@ -1,4 +1,6 @@
 class LoginController < ApplicationController
+  skip_before_action :logoutAuth
+
   def index
     @users = User.new
   end
@@ -8,11 +10,17 @@ class LoginController < ApplicationController
 
     respond_to do |format|
       if @current_user.empty?
-        format.html { redirect_to root_path, notice: 'Username/Password was not entered correctly.' }
+        format.html { redirect_to root_path, alert: 'Username/Password was not entered correctly.' }
       else
         session[:user_id] = @current_user.first.id
         format.html { redirect_to options_path }
       end
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    @users = User.new
+    redirect_to login_path
   end
 end

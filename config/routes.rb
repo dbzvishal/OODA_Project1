@@ -5,9 +5,11 @@ Rails.application.routes.draw do
 
   # Start page
   root 'login#index'
-
+  get '/login', to: 'login#index', as: 'login'
   # Submit page
   post '/login', to: 'login#show'
+  # Logout page
+  get '/logout', to: 'login#destroy', as: 'logout'
 
   get '/users/options', to: 'users#options', as: 'options'
 end

@@ -8,9 +8,10 @@ class LoginController < ApplicationController
 
     respond_to do |format|
       if @current_user.empty?
-        format.html { redirect_to root_path, notice: 'Username/Password was not entered correctly.' + params[:uname].to_s }
+        format.html { redirect_to root_path, notice: 'Username/Password was not entered correctly.' }
       else
-        format.html
+        session[:user_id] = @current_user.id
+        format.html { redirect_to options_path }
       end
     end
   end

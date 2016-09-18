@@ -10,7 +10,7 @@ class LoginController < ApplicationController
       if @current_user.empty?
         format.html { redirect_to root_path, notice: 'Username/Password was not entered correctly.' }
       else
-        session[:user_id] = @current_user.id
+        session[:user_id] = @current_user.first.id
         format.html { redirect_to options_path }
       end
     end

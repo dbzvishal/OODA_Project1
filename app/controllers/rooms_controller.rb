@@ -27,7 +27,8 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = Room.new(room_params)
-    @room.set_available
+    @room.set_available!
+    @room.size = Room.get_size params['room']['size']
     respond_to do |format|
       if Room.where("rnumber = ?", params['room']['rnumber']).empty?
         if @room.save

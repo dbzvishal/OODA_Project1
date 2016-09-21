@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   get '/users/new', to: 'users#new', as: 'add_user'
   # Submit User Info
   post '/users/create', to: 'users#create', as: 'create_user'
+  # User Edit page
+  get '/users/edit', to: 'users#edit', as: 'edit_user'
+  # Show Edit page
+  patch '/users/update', to: 'users#update', as: 'update_user'
+  # User Edit page
+  get '/users', to: 'users#show', as: 'users'
 
   # New Booking Page
   get '/bookings/new', to: 'bookings#new', as: 'add_booking'

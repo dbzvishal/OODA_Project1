@@ -4,6 +4,6 @@
     <p id="notice"><%= flash[:alert] %></p>
 <%end%>
 
-<%= render 'form', user: @user %>
+<%= render 'form', {user: @user, action: 'create'} %>
 <br />
 <%= button_to 'Back', login_path, :method => 'get' %>

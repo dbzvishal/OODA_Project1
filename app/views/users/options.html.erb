@@ -5,6 +5,9 @@
 <%= link_to 'My Bookings', show_booking_path %> <br />
 <%= link_to 'My Profile', users_path %> <br />
 <%if(@admin)%>
+    <h3>Administrative Actions</h3>
     <%= link_to 'Add a new room', add_room_path %> <br />
     <%= link_to 'Add a new user', add_user_path %> <br />
+    <%= link_to 'View Library Members', users_index_path %> <br />
+    <%= link_to 'View Admins', users_admin_index_path %> <br />
 <%end%>

@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   patch '/users/update', to: 'users#update', as: 'update_user'
   # User Edit page
   get '/users', to: 'users#show', as: 'users'
+  # User List page
+  get '/users/index', to: 'users#index', as: 'users_index'
+  # Admin Edit page
+  get '/users/admin_index', to: 'users#admin_index', as: 'users_admin_index'
 
   # Add a room (the form)
   get '/rooms/new', to: 'rooms#new', as: 'add_room'

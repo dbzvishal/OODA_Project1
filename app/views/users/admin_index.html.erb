@@ -4,21 +4,21 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Uname</th>
-      <th>Uemail</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Uname</th>
+    <th>Uemail</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
       <tr>
         <td><%= user.uname %></td>
         <td><%= user.uemail %></td>
         <td><%= link_to 'Show', users_path %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', users_index_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', users_admin_index_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
   </tbody>

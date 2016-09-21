@@ -1,14 +1,18 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :new, :edit, :update, :destroy, :options]
+  before_action :set_user, only: [:show, :new, :edit, :update, :destroy, :options, :index, :admin_index]
   skip_before_action :logoutAuth, only: [:new, :create]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @users = User.all.select {|useradmin| useradmin.utype == "member"}
   end
-
-  # GET /users/1
+  def admin_index
+    @users = User.all
+    @users = User.all.select {|useradmin| useradmin.utype == "admin"}
+  end
+    # GET /users/1
   # GET /users/1.json
   def show
   end
@@ -64,7 +68,11 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-
+    respond_to do |format|
+      if @user.destroy
+      format.html { redirect_to root_path, alert: 'User was successfully deleted.' }
+      end
+    end
   end
 
   private

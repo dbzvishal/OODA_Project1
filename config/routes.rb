@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post '/rooms/create', to: 'rooms#create', as: 'create_room'
   # Show room details
   get '/rooms/:id', to: 'rooms#show', as: 'show_room'
+  # List rooms
+  get '/rooms', to: 'rooms#index', as: 'rooms'
 
   # New Booking Page
   get '/bookings/new', to: 'bookings#new', as: 'add_booking'

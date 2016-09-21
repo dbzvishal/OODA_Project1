@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Rnumber:</strong>
+  <strong>Room number:</strong>
   <%= @room.rnumber %>
+</p>
+<p>
+  <strong>Building:</strong>
+  <%= @room.building.bname %>
 </p>
 
 <%= link_to 'Back', options_path %>

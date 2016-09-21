@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
     @room.set_available!
     @room.size = Room.get_size params['room']['size']
     respond_to do |format|
-      if Room.where("rnumber = ?", params['room']['rnumber']).empty?
+      if Room.where("rnumber = ? and building_id = ?", params['room']['rnumber'], params['room']['building_id']).empty?
         if @room.save
           format.html { redirect_to show_room_path(@room.id), notice: 'Room was successfully created' }
         else
@@ -69,7 +69,7 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params[:id])
+      @room = Room.find_by_rnumber(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -18,4 +18,17 @@ class Room < ApplicationRecord
     end
     size_num
   end
+
+  def self.get_size_in_words(size_num)
+    size = 'Error'
+    case size_num
+      when 4
+        size = 'Small'
+      when 6
+        size = 'Medium'
+      when 12
+        size = 'Large'
+    end
+    size
+  end
 end

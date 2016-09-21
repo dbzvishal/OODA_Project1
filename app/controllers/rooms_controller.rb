@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
+  $room_sizes = %w[Small Medium Large]
   # GET /rooms
   # GET /rooms.json
   def index
@@ -15,6 +16,7 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   def new
     @room = Room.new
+    @buildings = Building.all.collect {|p| [ p.bname, p.id ] }
   end
 
   # GET /rooms/1/edit
@@ -25,15 +27,18 @@ class RoomsController < ApplicationController
   # POST /rooms.json
   def create
     @room = Room.new(room_params)
-
+    @room.set_available!
+    @room.size = Room.get_size params['room']['size']
     respond_to do |format|
-      if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
-        format.json { render :show, status: :created, location: @room }
+      if Room.where("rnumber = ?", params['room']['rnumber']).empty?
+        if @room.save
+          format.html { redirect_to show_room_path(@room.id), notice: 'Room was successfully created' }
+        else
+          format.html { render :new, alert: 'Error occurred while creating room' + @room.valid?.to_s }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+        format.html { redirect_to add_room_path, alert: 'Room ID is already in database' }
+    end
     end
   end
 
@@ -69,6 +74,6 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:rnumber)
+      params.require(:room).permit(:rnumber, :size, :building_id)
     end
 end

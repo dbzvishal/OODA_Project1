@@ -20,6 +20,13 @@ Rails.application.routes.draw do
   # User Edit page
   get '/users', to: 'users#show', as: 'users'
 
+  # Add a room (the form)
+  get '/rooms/new', to: 'rooms#new', as: 'add_room'
+  # Create a room
+  post '/rooms/create', to: 'rooms#create', as: 'create_room'
+  # Show room details
+  get '/rooms/:id', to: 'rooms#show', as: 'show_room'
+
   # New Booking Page
   get '/bookings/new', to: 'bookings#new', as: 'add_booking'
   # Submit Booking Info

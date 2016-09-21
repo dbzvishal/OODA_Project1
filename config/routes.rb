@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   # Submit User Info
   post '/users/create', to: 'users#create', as: 'create_user'
 
+  # Add a room (the form)
+  get '/rooms/new', to: 'rooms#new', as: 'add_room'
+  # Create a room
+  post '/rooms/create', to: 'rooms#create', as: 'create_room'
+  # Show room details
+  get '/rooms/:id', to: 'rooms#show', as: 'show_room'
+
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'
 

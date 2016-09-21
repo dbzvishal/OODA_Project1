@@ -1,8 +1,6 @@
 
-<h1>Welcome </h1>
-<%= session[:user_id] %>
+<h1>Welcome <%= @user.uname %></h1>
 
-<%= link_to 'Book a Room' %> <br />
-<%= link_to 'My Bookings' %> |<br />
-<%= link_to 'Edit My Information' %> |<br />
-<%= link_to 'Logout' %>
+<%= link_to 'Book a Room', add_booking_path %> <br />
+<%= link_to 'My Bookings' %> <br />
+<%= link_to 'Edit My Information' %> <br />

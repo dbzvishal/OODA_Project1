@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   # Submit User Info
   post '/users/create', to: 'users#create', as: 'create_user'
 
+  # New Booking Page
+  get '/bookings/new', to: 'bookings#new', as: 'add_booking'
+  #Submit Booking Info
+  post '/bookings/create', to: 'bookings#create', as: 'create_booking'
+
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'
 

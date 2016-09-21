@@ -21,6 +21,15 @@ Rails.application.routes.draw do
   # Show room details
   get '/rooms/:id', to: 'rooms#show', as: 'show_room'
 
+  # New Booking Page
+  get '/bookings/new', to: 'bookings#new', as: 'add_booking'
+  # Submit Booking Info
+  post '/bookings/create', to: 'bookings#create', as: 'create_booking'
+  # Show Booking Page
+  get '/bookings/show', to: 'bookings#show', as: 'show_booking'
+  # Edit Booking Page
+  get '/bookings/edit', to: 'bookings#edit', as: 'edit_booking'
+
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'
 

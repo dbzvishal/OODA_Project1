@@ -1,10 +1,13 @@
+<h1>Login</h1>
 
 <%= form_for @users, :url => {:action => 'show'} do |f| %>
-    <p id="notice"><%= notice %></p>
+    <% if flash[:alert]%>
+      <p id="notice"><%= flash[:alert] %></p>
+    <%end%>
     <br />
     <table>
       <tr>
-        <td>Username: </td><td><%= f.text_field :uname %> </td>
+        <td>Username/Email: </td><td><%= f.text_field :uname %> </td>
       </tr>
       <tr>
         <td>Password: </td><td><%= f.password_field :pass %></td>
@@ -13,3 +16,5 @@
     <br />
     <%= f.submit 'Log In'%>
 <% end %>
+<br />
+<%= button_to 'Register', add_user_path, :method => 'get' %>

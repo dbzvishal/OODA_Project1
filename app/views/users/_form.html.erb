@@ -1,37 +1,33 @@
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for user, :url => {:action => 'create'} do |f| %>
+    <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <table>
+      <tr>
+        <td><%= f.label :Username %></td>
+        <td><%= f.text_field :uname %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :uname %>
-    <%= f.text_field :uname %>
-  </div>
+      <tr>
+        <td><%= f.label :Email %></td>
+        <td><%= f.email_field :uemail %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :uemail %>
-    <%= f.text_field :uemail %>
-  </div>
+      <tr>
+        <td><%= f.label :Password %></td>
+        <td><%= f.password_field :password %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :uphone %>
-    <%= f.number_field :uphone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.text_field :password %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <tr>
+        <td><%= f.submit 'Submit' %></td>
+      </tr>
+    </table>
 <% end %>

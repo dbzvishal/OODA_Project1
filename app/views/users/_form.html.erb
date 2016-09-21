@@ -26,6 +26,17 @@
         <td><%= f.password_field :password %></td>
       </tr>
 
+      <% if (@admin) %>
+      <tr>
+        <td><%= f.radio_button(:utype, "admin") %></td>
+        <td><%= f.label :Admin %></td>
+      </tr>
+      <tr>
+        <td><%= f.radio_button(:utype, "member") %></td>
+        <td><%= f.label :Member %></td>
+      </tr>
+      <% end %>
+
       <tr>
         <td><%= f.submit 'Submit' %></td>
       </tr>

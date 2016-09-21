@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :options]
+  before_action :set_user, only: [:show, :new, :edit, :update, :destroy, :options]
   skip_before_action :logoutAuth, only: [:new, :create]
 
   # GET /users
@@ -32,7 +32,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if User.where("uname = ? or uemail = ?", params['user']['uname'], params['user']['uemail']).empty?
         @user = User.new(user_params)
-        @user.setMember
+        if(!@user.utype)
+          @user.setMember
+        end
         if @user.save
           format.html { redirect_to root_path, alert: 'User was successfully created.' }
         else
@@ -69,10 +71,13 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(session[:user_id])
+      if @user.utype == "admin"
+        @admin = true
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:uname, :uemail, :password)
+      params.require(:user).permit(:uname, :uemail, :password, :utype)
     end
 end

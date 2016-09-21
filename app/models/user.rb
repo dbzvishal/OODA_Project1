@@ -4,4 +4,7 @@ class User < ApplicationRecord
   def setMember
     self.utype = 'member'
   end
+  def setAdmin
+    self.utype = 'admin'
+  end
 end

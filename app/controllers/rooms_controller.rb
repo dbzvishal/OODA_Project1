@@ -32,7 +32,7 @@ class RoomsController < ApplicationController
     respond_to do |format|
       if Room.where("rnumber = ? and building_id = ?", params['room']['rnumber'], params['room']['building_id']).empty?
         if @room.save
-          format.html { redirect_to show_room_path(@room.id), notice: 'Room was successfully created' }
+          format.html { redirect_to rooms_path, notice: 'Room was successfully created' }
         else
           format.html { render :new, alert: 'Error occurred while creating room' + @room.valid?.to_s }
         end

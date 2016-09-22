@@ -21,6 +21,7 @@ class LoginController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    @admin = nil
     @users = User.new
     redirect_to login_path
   end

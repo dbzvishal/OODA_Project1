@@ -81,9 +81,6 @@ class UsersController < ApplicationController
     def set_user
       unless session[:user_id].nil?
         @user = User.find(session[:user_id])
-        if @user.utype == "admin"
-          @admin = true
-        end
       end
     end
 

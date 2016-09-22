@@ -3,6 +3,7 @@
   <head>
     <title>Library Room Booking</title>
     <%= csrf_meta_tags %>
+    <%= javascript_include_tag "application" %>
     <% unless session[:user_id].nil? %>
       <h3 id='logout' name='logout' style="text-align: right; color: blue">
         <%= link_to 'Logout', logout_path %>

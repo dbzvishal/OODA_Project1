@@ -57,7 +57,6 @@ class RoomsController < ApplicationController
   end
 
   # DELETE /rooms/1
-  # DELETE /rooms/1.json
   def destroy
     @room.destroy
     respond_to do |format|

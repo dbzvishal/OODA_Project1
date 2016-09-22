@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
   skip_before_action :logoutAuth
+  before_action :loginPage, only: [:index]
 
   def index
     @users = User.new
@@ -23,4 +24,9 @@ class LoginController < ApplicationController
     @users = User.new
     redirect_to login_path
   end
+
+  private
+    def loginPage
+      redirect_to options_path unless session[:user_id].nil?
+    end
 end

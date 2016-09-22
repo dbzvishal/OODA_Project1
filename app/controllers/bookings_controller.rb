@@ -6,7 +6,9 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
   end
-
+  def user_index
+    @bookings = Booking.get_user_bookings(session[:user_id])
+  end
   # GET /bookings/1
   # GET /bookings/1.json
   def show
@@ -28,7 +30,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+        format.html { redirect_to show_booking_path, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
+        format.html { redirect_to show_booking_path, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to options_path, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +71,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:date, :timefrom, :timeto)
+      params.require(:booking).permit(:date, :timefrom, :timeto, :users_id, :room_id)
     end
 end

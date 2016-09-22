@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    @users = User.all.select {|useradmin| useradmin.utype == "member"}
+    @users = User.get_members_only
   end
   def admin_index
     @users = User.all
-    @users = User.all.select {|useradmin| useradmin.utype == "admin"}
+    @users = User.get_admins_only
   end
     # GET /users/1
   # GET /users/1.json

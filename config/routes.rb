@@ -45,6 +45,11 @@ Rails.application.routes.draw do
   get '/bookings/show', to: 'bookings#show', as: 'show_booking'
   # Edit Booking Page
   get '/bookings/edit', to: 'bookings#edit', as: 'edit_booking'
+  # Show All Bookings Page
+  get '/bookings/index', to: 'bookings#index', as: 'bookings'
+  # Show My Bookings Page
+  get '/bookings/user_index', to: 'bookings#user_index', as: 'user_bookings'
+
 
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'

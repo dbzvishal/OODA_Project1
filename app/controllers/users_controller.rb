@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :new, :edit, :update, :destroy, :options, :index, :admin_index]
+  before_action :set_user, only: [:show, :new, :edit, :update, :options, :index, :admin_index]
+  before_action :set_temp_user, only: [:destroy]
   skip_before_action :logoutAuth, only: [:new, :create]
 
   # GET /users
@@ -69,8 +70,8 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     respond_to do |format|
-      if @user.destroy
-      format.html { redirect_to users_index_path, alert: 'User was successfully deleted.' }
+      if @input_user.destroy
+        format.html { redirect_to users_index_path, alert: 'User was successfully deleted.' }
       end
     end
   end
@@ -84,6 +85,10 @@ class UsersController < ApplicationController
           @admin = true
         end
       end
+    end
+
+    def set_temp_user
+      @input_user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

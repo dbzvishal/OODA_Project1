@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get '/users/index', to: 'users#index', as: 'users_index'
   # Admin Edit page
   get '/users/admin_index', to: 'users#admin_index', as: 'users_admin_index'
+  # User Destroy page
+  get '/users/destroy', to: 'users#destroy', as: 'users_destroy'
 
   # Add a room (the form)
   get '/rooms/new', to: 'rooms#new', as: 'add_room'
@@ -32,6 +34,8 @@ Rails.application.routes.draw do
   get '/rooms/:id', to: 'rooms#show', as: 'show_room'
   # List rooms
   get '/rooms', to: 'rooms#index', as: 'rooms'
+  # Destroy rooms
+  get '/rooms/destroy', to: 'rooms#destroy', as: 'rooms_destroy'
 
   # New Booking Page
   get '/bookings/new', to: 'bookings#new', as: 'add_booking'

@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   def destroy
     respond_to do |format|
       if @user.destroy
-      format.html { redirect_to root_path, alert: 'User was successfully deleted.' }
+      format.html { redirect_to users_index_path, alert: 'User was successfully deleted.' }
       end
     end
   end

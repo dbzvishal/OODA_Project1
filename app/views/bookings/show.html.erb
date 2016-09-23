@@ -11,13 +11,16 @@
   <p id="notice"><%= notice %></p>
   <table>
     <tr>
-      <th>Date</th>
+      <th></th>
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
-    <% @booking.each do |booking| %>
+    <% i=0
+      @booking.each do |booking|
+      i = i + 1
+    %>
       <tr>
-        <td><%= booking.date %></td>
+        <td><%= i %></td>
         <td><%= booking.timefrom %></td>
         <td><%= booking.timeto %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking.id) %></td>

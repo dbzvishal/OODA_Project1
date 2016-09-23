@@ -9,6 +9,30 @@ table, th, td {
 
 <h1>Rooms</h1>
 
+<h2>Search Room by parameters</h2>
+<h4>Enter the following parameters:</h4>
+
+<%= form_tag("/search", method: "get") do %>
+
+    <%= label_tag(:q, "Room Number:") %>
+    <%= text_field_tag(:q) %>
+    <br>
+    <%= label_tag(:q, "Room Size:") %>
+    <%= text_field_tag(:q) %>
+    <br>
+    <%= label_tag(:q, "Building:") %>
+    <%= text_field_tag(:q) %>
+    <br>  
+    <%= label_tag(:q, "Status:") %>
+    <%= text_field_tag(:q) %>
+    <br>
+    <%= submit_tag("Search") %>
+
+<% end %>
+<br>
+<br>
+
+
 <table>
   <thead>
     <tr>

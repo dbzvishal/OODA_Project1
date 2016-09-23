@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   # List rooms
   get '/rooms', to: 'rooms#index', as: 'rooms'
   # Destroy rooms
-  delete '/rooms/destroy/:id', to: 'rooms#destroy', as: 'rooms_destroy'
+  delete '/rooms/:id', to: 'rooms#destroy', as: 'rooms_destroy'
 
   # New Booking Page
   get '/bookings/new', to: 'bookings#new', as: 'add_booking'
@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   get '/bookings/index', to: 'bookings#index', as: 'bookings'
   # Show My Bookings Page
   get '/bookings/user_index', to: 'bookings#user_index', as: 'user_bookings'
+  # Destroy Bookings
+  delete '/bookings/:id', to: 'bookings#destroy', as: 'bookings_destroy'
 
   # Get list of rooms from Building
   get '/buildings/:id', to: 'buildings#show', as: 'show_building'

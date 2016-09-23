@@ -40,8 +40,14 @@ class BookingsController < ApplicationController
     end
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
+        if @admin
+          user_id = @booking.user_id
+          @booking = Booking.get_user_bookings user_id
+          @user_name = User.select("uname").find(user_id).uname
+          format.html { render :show, notice: 'Booking was successfully created.' }
+        else
+          format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
+        end
       else
         format.html { render :new }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
@@ -68,7 +74,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to options_path, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to options_path, notice: 'Booking was successfully deleted.' }
       format.json { head :no_content }
     end
   end

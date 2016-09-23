@@ -23,18 +23,13 @@
 <br />
 
   <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
-  </div>
-
-  <div class="field">
     <%= f.label :timefrom %>
-    <%= f.time_select :timefrom %>
+    <%= f.datetime_select :timefrom, discard_year:true %>
   </div>
 
   <div class="field">
     <%= f.label :timeto %>
-    <%= f.time_select :timeto %>
+    <%= f.datetime_select :timeto, discard_year:true %>
   </div>
 
     <% if(@admin) %>

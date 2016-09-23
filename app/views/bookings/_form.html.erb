@@ -50,6 +50,6 @@
 <br/>
 
 
-<head>
-  <%= javascript_include_tag 'bookings/bookings'%>
-</head>
+<% content_for :header do -%>
+    <%= javascript_include_tag 'bookings/bookings'%>
+<% end -%>

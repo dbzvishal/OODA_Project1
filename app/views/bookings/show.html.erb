@@ -1,11 +1,5 @@
-<style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-</style>
+<% stylesheet_link_tag 'bookings/tables' %>
+
 <% unless @booking.empty? %>
   <h3>Booking History for User: <%= @user_name %></h3>
   <p id="notice"><%= notice %></p>

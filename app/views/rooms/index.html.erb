@@ -18,17 +18,18 @@ table, th, td {
     <%= text_field_tag(:q) %>
     <br>
     <%= label_tag(:q, "Room Size:") %>
-    <%= text_field_tag(:q) %>
+        <td><%= select("room", "size", $room_sizes) %></td>
     <br>
     <%= label_tag(:q, "Building:") %>
-    <%= text_field_tag(:q) %>
-    <br>  
-    <%= label_tag(:q, "Status:") %>
-    <%= text_field_tag(:q) %>
+    <td><%= select("room", "building_id", $buildings) %></td>
     <br>
+    <%= label_tag(:q, "Status:  ") %>
+    <td><%= select("room","status", $status) %></td>
+    <br><br>
     <%= submit_tag("Search") %>
 
 <% end %>
+
 <br>
 <br>
 

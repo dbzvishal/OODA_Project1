@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:edit, :update, :destroy]
   before_action :set_user_type, only: [:new]
 
   # GET /bookings
@@ -8,11 +8,15 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
   def user_index
-    @bookings = Booking.get_user_bookings(session[:user_id])
+    @booking = Booking.get_user_bookings(session[:user_id])
+    @user_name = User.select("uname").find(session[:user_id]).uname
+    render :show
   end
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    @booking = Booking.get_user_bookings params[:id]
+    @user_name = User.select("uname").find(params[:id]).uname
   end
 
   # GET /bookings/new
@@ -40,7 +44,6 @@ class BookingsController < ApplicationController
         format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
-        puts @booking.errors.full_messages
         format.html { render :new }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end

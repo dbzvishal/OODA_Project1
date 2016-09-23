@@ -31,4 +31,9 @@ class Room < ApplicationRecord
     end
     size
   end
+
+  def self.search(search)
+      where("rnumber LIKE ?", "%#{search}%")
+      #where("size LIKE ?", "%#{search}%")
+  end
 end

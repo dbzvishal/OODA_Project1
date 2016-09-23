@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = Room.all
+    @buildings = Building.all.select(:bname).collect do |x| x.bname end
   end
 
   # GET /rooms/1

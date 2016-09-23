@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
 
   protected
   def logoutAuth
-    unless User.find_by(id: session[:user_id])
+    @admin = false
+    @super_admin = false
+    @user = User.find_by(id: session[:user_id])
+    unless @user.nil?
+      @admin = true if @user.utype == "admin"
+      @super_admin = true if @user.utype == "SuperAdmin"
+    else
       redirect_to root_path, alert: "You are trying to access a page that requires authorization"
     end
   end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :new, :edit, :update, :options, :index, :admin_index]
   before_action :set_temp_user, only: [:destroy]
   skip_before_action :logoutAuth, only: [:new, :create]
+  before_action only: [:new, :create] { logoutAuth(false) }
 
   # GET /users
   # GET /users.json

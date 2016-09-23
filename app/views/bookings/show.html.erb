@@ -1,19 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @booking.date %>
-</p>
-
-<p>
-  <strong>Timefrom:</strong>
-  <%= @booking.timefrom %>
-</p>
-
-<p>
-  <strong>Timeto:</strong>
-  <%= @booking.timeto %>
-</p>
-
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', show_booking_path %>
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+</style>
+<% unless @booking.empty? %>
+  <h3>Booking History for User: <%= @user_name %></h3>
+  <p id="notice"><%= notice %></p>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+    <% @booking.each do |booking| %>
+      <tr>
+        <td><%= booking.date %></td>
+        <td><%= booking.timefrom %></td>
+        <td><%= booking.timeto %></td>
+        <td><%= link_to 'Edit', edit_booking_path(booking.id) %></td>
+      </tr>
+    <%end%>
+  </table>
+<% else %>
+    No Booking History found for user
+<% end %>

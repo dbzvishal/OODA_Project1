@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   # Submit Booking Info
   post '/bookings/create', to: 'bookings#create', as: 'create_booking'
   # Show Booking Page
-  get '/bookings/show', to: 'bookings#show', as: 'show_booking'
+  get '/bookings/show/:id', to: 'bookings#show', as: 'show_booking'
   # Edit Booking Page
   get '/bookings/edit', to: 'bookings#edit', as: 'edit_booking'
   # Show All Bookings Page

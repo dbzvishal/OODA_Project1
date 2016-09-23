@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:edit, :update, :destroy]
 
   # GET /bookings
   # GET /bookings.json
@@ -7,11 +7,15 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
   def user_index
-    @bookings = Booking.get_user_bookings(session[:user_id])
+    @booking = Booking.get_user_bookings(session[:user_id])
+    @user_name = User.select("uname").find(session[:user_id]).uname
+    render :show
   end
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    @booking = Booking.get_user_bookings params[:id]
+    @user_name = User.select("uname").find(params[:id]).uname
   end
 
   # GET /bookings/new

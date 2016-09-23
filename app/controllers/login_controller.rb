@@ -28,6 +28,6 @@ class LoginController < ApplicationController
 
   private
     def loginPage
-    #  redirect_to options_path unless session[:user_id].nil?
+       redirect_to options_path unless session[:user_id].nil?
     end
 end

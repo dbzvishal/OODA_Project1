@@ -50,6 +50,8 @@ Rails.application.routes.draw do
   # Show My Bookings Page
   get '/bookings/user_index', to: 'bookings#user_index', as: 'user_bookings'
 
+  # Get list of rooms from Building
+  get '/buildings/:id', to: 'buildings#show', as: 'show_building'
 
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'

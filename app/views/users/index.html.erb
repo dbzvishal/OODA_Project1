@@ -18,7 +18,7 @@
         <td><%= user.uemail %></td>
         <td><%= link_to 'Show', users_path %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Delete', users_destroy_path, :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', users_destroy_path(user.id), :method => :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
   </tbody>

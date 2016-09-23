@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_type, only: [:new]
 
   # GET /bookings
   # GET /bookings.json
@@ -17,6 +18,10 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    # @admin = Booking.is_admin(session[:user_id])
+    @users = User.all.collect {|p| [ p.uname, p.id ] }
+    @buildings = Building.all.collect {|p| [ p.bname, p.id] }
+    @rooms = []
   end
 
   # GET /bookings/1/edit
@@ -27,12 +32,15 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     @booking = Booking.new(booking_params)
-
+    if(@booking.user_id.nil?)
+      @booking.user_id = session[:user_id]
+    end
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to show_booking_path, notice: 'Booking was successfully created.' }
+        format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
+        puts @booking.errors.full_messages
         format.html { render :new }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
@@ -65,12 +73,16 @@ class BookingsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
+  def set_user_type
+    @admin = Booking.is_admin(session[:user_id])
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def booking_params
-      params.require(:booking).permit(:date, :timefrom, :timeto, :users_id, :room_id)
-    end
+  def booking_params
+    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :room_id )
+  end
 end

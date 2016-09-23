@@ -10,6 +10,10 @@ class BuildingsController < ApplicationController
   # GET /buildings/1
   # GET /buildings/1.json
   def show
+    respond_to do |format|
+      @rooms = @building.rooms.select(:id,:rnumber)
+      format.json { render json: @rooms }
+    end
   end
 
   # GET /buildings/new

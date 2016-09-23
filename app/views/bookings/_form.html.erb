@@ -1,79 +1,55 @@
 <%= form_for booking, :url => {:action => 'create'}, :html => {:name => 'booking_form', onsubmit: "return validation();"} do |f| %>
-  <% if booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+    <% if booking.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
 
-      <ul>
-      <% booking.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% booking.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :building %>
+      <%= select("building", "id", @buildings, :prompt => 'Choose Building') %>
     </div>
-  <% end %>
 
-  <div class="field">
-     <%= f.label :building %>
-     <%= select("building", "id", @buildings, :prompt => 'Choose Building') %>
-  </div>
-  <br />
     <div class="field">
       <%= f.label :room %>
       <%= select("booking", "room_id", @rooms) %>
     </div>
-<br />
-
-  <div class="field">
-    <%= f.label :timefrom %>
-    <%= f.datetime_select :timefrom, discard_year:true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :timeto %>
-    <%= f.datetime_select :timeto, discard_year:true %>
-  </div>
-
-    <% if(@admin) %>
-    <% unless @users.nil? %>
+    <br/>
+    Bookings can be made for at most two hours
+    <br /><br />
     <div class="field">
-    <%= f.label :user %>
-    <%= select("booking", "user_id", @users) %>
+      <%= f.label 'Start Time' %>
+      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 15, min: Date.today, max: (Time.now + 2.weeks) %>
     </div>
-    <% end %>
-    <% end %>
-    <br />
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label 'End Time' %>
+      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 15, min: Date.today, max: (DateTime.now + 2.weeks) %>
+    </div>
+
+    <% if (@admin) %>
+        <% unless @users.nil? %>
+            <div class="field">
+              <%= f.label :user %>
+              <%= select("booking", "user_id", @users) %>
+            </div>
+        <% end %>
+    <% end %>
+    <br/>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
-<br />
+<br/>
 
-<script type="text/javascript">
-  function validation()
-  {
-    if (document.getElementById('building_id').value === '')
-    {
-      return false;
-    }
-  }
-  $('#building_id').on('change', function(ele) {
-    var selected_item = $(ele.currentTarget).val();
-    if(selected_item !== '')
-    {
-      $.ajax(
-          {
-            url: "/buildings/" + selected_item + ".json",
-            success: function(jsonVal){
-              $('#booking_room_id').find('option').remove().end();
-              $.each(jsonVal, function(i, obj) {
-                $('#booking_room_id').append($("<option></option>").attr("value", obj.id).text(obj.rnumber));
-            })
-          }
-          });
-    }
-    else
-    {
-      $('#booking_room_id').find('option').remove().end();
-    }
-  });
-</script>
+
+<head>
+  <%= javascript_include_tag 'bookings/bookings'%>
+</head>

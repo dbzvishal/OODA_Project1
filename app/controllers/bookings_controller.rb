@@ -39,17 +39,26 @@ class BookingsController < ApplicationController
       @booking.user_id = session[:user_id]
     end
     respond_to do |format|
+
+      # Validation
+      response_str = validate
+      unless response_str == ''
+        initial_val
+        redirect_to add_booking_path, notice: response_str
+        return
+      end
+
       if @booking.save
         if @admin
           user_id = @booking.user_id
           @booking = Booking.get_user_bookings user_id
           @user_name = User.select("uname").find(user_id).uname
-          format.html { render :show, notice: 'Booking was successfully created.' }
+          format.html { redirect_to :show, notice: 'Booking was successfully created.' }
         else
           format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
         end
       else
-        format.html { render :new }
+        format.html { redirect_to :new, alert: 'An error occurred and booking did not happen.' }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -88,6 +97,29 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def booking_params
-    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :room_id )
+    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :room_id, :building_id )
+  end
+
+  def initial_val
+    @users = User.all.collect {|p| [ p.uname, p.id ] }
+    @buildings = Building.all.collect {|p| [ p.bname, p.id] }
+    @rooms = []
+  end
+
+  def validate
+    response_str = '';
+    if (@booking.timeto < @booking.timefrom)
+      response_str = 'End time must bbe greater than start time'
+    elsif @booking.timefrom < DateTime.now
+      response_str = 'Start time cannot be lesser than current time'
+    elsif @booking.timeto - @booking.timefrom > 2.hours
+      response_str = 'Room cannot be booked for more than 2 hours'
+    elsif @booking.timeto - DateTime.now > 2.weeks
+      response_str = 'Room cannot be booked ahead of 2 weeks'
+    elsif @booking.is_booked?(params['building']['id'])
+      response_str = 'The room is already booked for the specified time'
+    end
+
+    response_str
   end
 end

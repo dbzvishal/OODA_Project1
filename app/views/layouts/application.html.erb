@@ -4,6 +4,7 @@
     <title>Library Room Booking</title>
     <%= csrf_meta_tags %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'bookings/booking'%>
     <%= yield(:header) if content_for? :header %>
     <% unless session[:user_id].nil? %>
       <h3 id='logout' name='logout' style="text-align: right; color: blue">

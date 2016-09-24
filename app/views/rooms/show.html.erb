@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'bookings/tables' %>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -8,5 +9,42 @@
   <strong>Building:</strong>
   <%= @room.building.bname %>
 </p>
+
+<table>
+  <tr>
+    <th></th>
+    <%
+      hour = Time.now.at_midnight - 1.day
+      while hour < Time.now.at_midnight
+    %>
+      <th colspan="2"><%=hour.strftime "%l:%M %P"%></th>
+    <%
+      hour += 1.hour
+      end
+    %>
+  </tr>
+  <% 14.times.each do %>
+    <tr>
+      <td><%= @cur_date %></td>
+      <%
+        epoch_time = @cur_date.to_time.to_i
+        time = Time.at(epoch_time).at_midnight
+        time_next_day = Time.at(epoch_time).at_midnight + 1.day
+        while time < time_next_day
+      %>
+          <!-- Used to show the bookings for a room -->
+          <%unless @bookings.where('timefrom <= ? and timeto > ?', time, time).empty? %>
+              <td bgcolor="red"></td>
+          <%else%>
+              <td></td>
+          <%end%>
+      <%
+          time = time + 30.minutes
+        end
+        @cur_date = @cur_date + 1.day
+      %>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to 'Back', rooms_path %>

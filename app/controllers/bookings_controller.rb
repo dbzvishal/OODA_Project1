@@ -112,6 +112,8 @@ class BookingsController < ApplicationController
       response_str = 'End time must be greater than start time'
     elsif @booking.timefrom < DateTime.now
       response_str = 'Start time cannot be lesser than current time'
+    elsif @booking.timeto == @booking.timefrom
+      response_str = 'Start time cannot be equal to End time'
     elsif @booking.timeto - @booking.timefrom > 2.hours
       response_str = 'Room cannot be booked for more than 2 hours'
     elsif @booking.timeto - DateTime.now > 2.weeks

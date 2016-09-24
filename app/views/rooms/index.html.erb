@@ -41,6 +41,7 @@
       <th>Room number</th>
       <th>Building name</th>
       <th>Size(Chairs)</th>
+      <th colspan="2">Operations</th>
     </tr>
   </thead>
 
@@ -51,7 +52,6 @@
         <td><%= room.building.bname %></td>
         <td><%= Room.get_size_in_words room.size %>(<%= room.size %>)</td>
         <td> <%= link_to 'Show', show_room_path(room.rnumber) %></td>
-        <td> <%= link_to 'Book the room', show_room_path(room.rnumber) %></td>
         <td> <%= link_to 'Delete', rooms_destroy_path(room.rnumber), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

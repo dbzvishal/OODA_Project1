@@ -2,13 +2,26 @@
 
 <p>
   <strong>Uname:</strong>
-  <%= @user.uname %>
+  <i> <%= @user.uname %> </i>
 </p>
 
 <p>
   <strong>Uemail:</strong>
-  <%= @user.uemail %>
+  <i> <%= @user.uemail %> </i>
+  <% if(@user.uemail.nil?) %>
+  <i> Not provided </i>
+  <% end %>
 </p>
+<% if(@admin) %>
+<p>
+  <strong>Status:</strong>
+  <% if(@user.utype == "admin") %>
+  <i> Administrator </i>
+  <% else %>
+  <i> Member </i>
+  <% end %>
+</p>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

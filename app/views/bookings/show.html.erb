@@ -6,6 +6,7 @@
   <table>
     <tr>
       <th></th>
+      <th>Room</th>
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
@@ -15,6 +16,7 @@
     %>
       <tr>
         <td><%= i %></td>
+        <td><%= booking.room_id %></td>
         <td><%= booking.timefrom %></td>
         <td><%= booking.timeto %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking.id) %></td>
@@ -24,3 +26,7 @@
 <% else %>
     No Booking History found for user
 <% end %>
+<br />
+<br />
+<%= link_to 'New Booking', add_booking_path %><br /><br />
+<%= link_to 'Back to Dashboard', options_path%>

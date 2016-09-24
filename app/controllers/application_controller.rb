@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protected
   def logoutAuth(is_redirect=true)
     @zone='Eastern Time (US & Canada)'
+    @currentZone = ActiveSupport::TimeZone[@zone]
+    Time.zone = @zone
     @admin = false
     @super_admin = false
     @user = User.find_by(id: session[:user_id])

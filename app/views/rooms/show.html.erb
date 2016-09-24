@@ -28,8 +28,8 @@
       <td><%= @cur_date %></td>
       <%
         epoch_time = @cur_date.to_time.to_i
-        time = Time.at(epoch_time).at_midnight
-        time_next_day = Time.at(epoch_time).at_midnight + 1.day
+        time = @currentZone.at(Time.at(epoch_time).at_midnight)
+        time_next_day = time + 1.day
         while time < time_next_day
       %>
           <!-- Used to show the bookings for a room -->
@@ -46,5 +46,5 @@
     </tr>
   <% end %>
 </table>
-
-<%= link_to 'Back', rooms_path %>
+<br />
+<%= link_to '      Back', rooms_path %>

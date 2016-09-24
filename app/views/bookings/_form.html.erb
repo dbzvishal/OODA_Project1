@@ -12,36 +12,37 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :building %>
+      <b><%= f.label :building %></b>
       <%= select("building", "id", @buildings, :prompt => 'Choose Building') %>
-    </div>
+    </div><br/>
 
     <div class="field">
-      <%= f.label :room %>
+      <b><%= f.label :room %></b>
       <%= select("booking", "room_id", @rooms) %>
     </div>
     <br/>
-    Bookings can be made for at most two hours
-    <br /><br />
-    <div class="field">
-      <%= f.label 'Start Time' %>
-      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (ActiveSupport::TimeZone[@zone].at(Time.now)+ 2.weeks) %>
-    </div>
-
-    <div class="field">
-      <%= f.label 'End Time' %>
-      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (ActiveSupport::TimeZone[@zone].at(Time.now) + 2.weeks) %>
-    </div>
 
     <% if (@admin) %>
         <% unless @users.nil? %>
             <div class="field">
-              <%= f.label :user %>
+              <b>Reserver the room for</b>
               <%= select("booking", "user_id", @users) %>
             </div>
         <% end %>
     <% end %>
     <br/>
+
+    <h3><i> Bookings can be made for at most two hours</i></h3>
+    <br />
+    <div class="field">
+      <b><%= f.label 'Select Date - Start Time' %></b>
+      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 2.weeks) %>
+    </div><br/>
+
+    <div class="field">
+      <b><%= f.label 'Select Date - End Time' %></b>
+      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 2.weeks) %>
+    </div><br/>
 
     <div class="actions">
       <%= f.submit %>

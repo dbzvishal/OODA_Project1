@@ -25,12 +25,12 @@
     <br /><br />
     <div class="field">
       <%= f.label 'Start Time' %>
-      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 15, min: Date.today, max: (Time.now + 2.weeks) %>
+      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (Time.now + 2.weeks) %>
     </div>
 
     <div class="field">
       <%= f.label 'End Time' %>
-      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 15, min: Date.today, max: (DateTime.now + 2.weeks) %>
+      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (DateTime.now + 2.weeks) %>
     </div>
 
     <% if (@admin) %>
@@ -49,13 +49,11 @@
 <% end %>
 <br/>
 
-
-<% content_for :header do -%>
-    <%= javascript_include_tag 'bookings/bookings'%>
-<% end -%>
-<script>
-  $('.actions').find('input').removeAttr('data-disable-with');
-  $('.actions').find('input').removeAttr('disabled');
-  $('#building_id').on('change', retrieve_rooms);
-  retrieve_rooms();
+<script type="text/javascript">
+  $('document').ready(function(){
+    $('.actions').find('input').removeAttr('data-disable-with');
+    $('.actions').find('input').removeAttr('disabled');
+    retrieve_rooms();
+    $('#building_id').on('change', retrieve_rooms);
+  });
 </script>

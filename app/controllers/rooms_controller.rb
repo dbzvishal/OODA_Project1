@@ -12,6 +12,8 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @cur_date = Date.today
+    @bookings = Booking.where('room_id = ?',@room.id)
   end
 
   # GET /rooms/new

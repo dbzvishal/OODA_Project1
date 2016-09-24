@@ -8,7 +8,7 @@ class Booking < ApplicationRecord
   end
 
   def is_booked? building_id
-    if Booking.joins(:room).where('id = ?, building_id = ? and ((timefrom >= ? and timeto <= ?) or (timefrom <= ? and timefrom >= ?) or (timeto <= ? and timeto >= ?))', self.id, building_id, self.timefrom, self.timeto, self.timefrom, self.timefrom, self.timeto, self.timeto)
+    unless Booking.joins(:room).where('rooms.id = ? and building_id = ? and ((timefrom <= ? and timeto >= ?) or (timefrom >= ? and timefrom <= ?) or (timeto <= ? and timeto >= ?))', self.room_id, building_id, self.timefrom, self.timeto, self.timefrom, self.timeto, self.timefrom, self.timeto).empty?
       return true;
     else
       return false;

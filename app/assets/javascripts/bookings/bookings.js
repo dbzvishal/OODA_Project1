@@ -21,9 +21,3 @@ function retrieve_rooms() {
         $('#booking_room_id').find('option').remove().end();
     }
 }
-
-
-$('.actions').find('input').removeAttr('data-disable-with');
-$('.actions').find('input').removeAttr('disabled');
-$('#building_id').on('change', retrieve_rooms);
-retrieve_rooms();

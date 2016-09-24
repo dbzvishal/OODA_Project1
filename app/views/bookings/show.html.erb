@@ -7,16 +7,19 @@
     <tr>
       <th></th>
       <th>Room</th>
+      <th>Building</th>
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
     <% i=0
       @booking.each do |booking|
       i = i + 1
+      room = booking.room
     %>
       <tr>
         <td><%= i %></td>
-        <td><%= booking.room_id %></td>
+        <td><%= room.rnumber %></td>
+        <td><%= room.building.bname %></td>
         <td><%= booking.timefrom %></td>
         <td><%= booking.timeto %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking.id) %></td>

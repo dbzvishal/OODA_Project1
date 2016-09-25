@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
   belongs_to :building
-  has_many :bookings
+  has_many :bookings, :dependent => :delete_all
 
   def set_available!
     self.status = 'available'

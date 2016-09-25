@@ -5,17 +5,20 @@
 
 <h1>Bookings</h1>
 
-<table>
-  <thead>
+<table style='text-align:center;vertical-align:middle;'>
+  <thead style='font-size: 25px;font-weight: bold;background-color: #333333;color:#FFFFFF;font-weight: bold;'>
     <tr>
       <th>Username</th>
-      <th>Timefrom</th>
-      <th>Timeto</th>
+      <th>Room Number</th>
+      <th>Building</th>
+      <th>Date of Booking</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody style="background-color:#F7F7F7">
     <% @bookings.each do |booking| %>
       <tr>
         <%unless booking.user.nil? %>
@@ -23,8 +26,19 @@
         <%else%>
           <td><%=  %></td>
         <%end%>
-        <td><%= booking.timefrom %></td>
-        <td><%= booking.timeto %></td>
+        <%unless booking.room.nil? %>
+            <td><%= booking.room.rnumber %></td>
+        <%else%>
+            <td><%=  %></td>
+        <%end%>
+        <%unless booking.room.building.nil? %>
+            <td><%= booking.room.building.bname %></td>
+        <%else%>
+            <td><%=  %></td>
+        <%end%>
+        <td><%= booking.timefrom.strftime("%d-%b-%y") %></td>
+        <td><%= booking.timefrom.strftime("%I:%M %p") %></td>
+        <td><%= booking.timeto.strftime("%I:%M %p") %></td>
         <td><%= link_to 'Show', show_booking_path(booking.user_id) %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
         <td><%= link_to 'Delete', bookings_destroy_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -14,7 +14,7 @@
     <% if (@admin) %>
         <% unless @users.nil? %>
             <div class="field">
-              <b>Reserver the room for</b>
+              <b>Reserve the room for</b>
               <%= select("booking", "user_id", @users) %>
             </div>
         <% end %>

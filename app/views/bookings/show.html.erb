@@ -3,31 +3,35 @@
 <% unless @booking.empty? %>
   <h3>Booking History for User: <%= @user_name %></h3>
   <p id="notice"><%= notice %></p>
-  <table>
-    <tr>
+  <table style='text-align:center;vertical-align:middle'>
+    <tr style='font-size: 25px;font-weight: bold;background-color: #333333;color:#FFFFFF;font-weight: bold;'>
       <th></th>
       <th>Room</th>
       <th>Building</th>
+      <th>Date of Booking</th>
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
     <% i=0
       @booking.each do |booking|
+      if(booking.timeto > @currentZone.at(Time.now))
       i = i + 1
       room = booking.room
     %>
-      <tr>
+      <tr style="background-color:#F7F7F7">
         <td><%= i %></td>
         <td><%= room.rnumber %></td>
         <td><%= room.building.bname %></td>
-        <td><%= booking.timefrom %></td>
-        <td><%= booking.timeto %></td>
+        <td><%= booking.timefrom.strftime("%d-%b-%y") %></td>
+        <td><%= booking.timefrom.strftime("%I:%M %p") %></td>
+        <td><%= booking.timeto.strftime("%I:%M %p") %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking.id) %></td>
       </tr>
     <%end%>
+    <%end%>
   </table>
 <% else %>
-    No Booking History found for user
+    <i>No Booking History found for user</i>
 <% end %>
 <br />
 <br />

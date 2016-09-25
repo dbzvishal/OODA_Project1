@@ -124,7 +124,13 @@ class BookingsController < ApplicationController
     elsif @booking.is_booked? @room.building_id
       response_str = 'The room is already booked for the specified time'
     end
-
+    @bookings_user = Booking.get_user_bookings(@booking.user_id)
+    @bookings_user.each do |booking|
+      if(booking.timeto > @booking.timefrom)
+        response_str = 'Another room cannot be booked in the same time period'
+        break
+      end
+    end
     response_str
   end
 end

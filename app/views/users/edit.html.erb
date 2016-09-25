@@ -1,6 +1,4 @@
 <h1>Editing User</h1>
 
 <%= render 'form', {user: @user, action: 'update'}  %>
-
-<%= link_to 'Show', @users %> |
-<%= link_to 'Back', options_path %>
+<div style="float: left; width: 50px"><%= button_to 'Go Back', options_path, :method => 'get' %></div>

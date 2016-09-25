@@ -57,9 +57,8 @@
         <option value="Available">Available</option>
         <option value="Booked">Booked</option>
       </select>
-    </div>
-
-    <input type="submit" onclick="getRoomsData();return false"/>
+    </div><br/>
+    <input type="submit" value = "Search" onclick="getRoomsData();return false"/>
     <br /><br />
 
     <table id="search_table" style="display: none">
@@ -69,15 +68,11 @@
         <th>Building</th>
         <th>Size</th>
       </tr>
-    </table>
-
-    <br />
+    </table><br/>
     <div class="actions" style="display: none" id="submit_button">
       <%= f.submit "Book the Room" %>
     </div>
 <% end %>
-<br/>
-
 
 <% content_for :header do -%>
     <%= javascript_include_tag 'bookings/booking'%>

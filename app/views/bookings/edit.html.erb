@@ -2,5 +2,5 @@
 
 <%= render 'form', booking: @booking %>
 
-<%= link_to 'Show', @booking %> |
-<%= link_to 'Back', show_booking_path %>
+<%= button_to 'Show', @booking, method: :get %> |
+<%= button_to 'Go Back', show_booking_path, method: :get %>

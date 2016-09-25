@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<h1>My Profile</h1><br/>
+<p style="font-size: 18px">
   <strong>Uname:</strong>
   <i> <%= @user.uname %> </i>
 </p>
 
-<p>
+<p style="font-size: 18px">
   <strong>Uemail:</strong>
   <i> <%= @user.uemail %> </i>
   <% if(@user.uemail.nil?) %>
@@ -13,7 +13,7 @@
   <% end %>
 </p>
 <% if(@admin) %>
-<p>
+<p style="font-size: 18px">
   <strong>Status:</strong>
   <% if(@user.utype == "admin") %>
   <i> Administrator </i>
@@ -21,7 +21,8 @@
   <i> Member </i>
   <% end %>
 </p>
-<% end %>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', options_path %>
+<% end %><br/>
+<div style="float: left; width: 50px">
+<%= button_to 'Edit', edit_user_path(@user), method: :get %> </div>
+<div style="float: left; width: 225px">
+<%= button_to 'Go Back', options_path, method: :get %></div>

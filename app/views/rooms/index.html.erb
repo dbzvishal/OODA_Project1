@@ -2,34 +2,33 @@
     <%= stylesheet_link_tag 'bookings/tables' %>
 <% end -%>
 
-<p id="notice"><%= notice %></p>
+<p id="notice"><i><%= notice %></i></p>
 
 <h1>Rooms</h1>
 
 <table>
   <thead>
-    <tr>
-      <th>Room number</th>
-      <th>Building name</th>
-      <th>Size(Chairs)</th>
-      <th colspan="2">Operations</th>
-    </tr>
+  <tr>
+    <th>Room number</th>
+    <th>Building name</th>
+    <th>Size (Chairs)</th>
+    <th colspan="2">Operations</th>
+  </tr>
   </thead>
 
-  <tbody>
+
     <% @rooms.each do |room| %>
       <tr>
         <td><%= room.rnumber %></td>
         <td><%= room.building.bname %></td>
-        <td><%= Room.get_size_in_words room.size %>(<%= room.size %>)</td>
+        <td><%= Room.get_size_in_words room.size %> (<%= room.size %>)</td>
         <td> <%= link_to 'Show', show_room_path(room.rnumber) %></td>
         <td> <%= link_to 'Delete', rooms_destroy_path(room.rnumber), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Room', add_room_path %><br /><br />
-<%= link_to 'Back', options_path%>
+<%= button_to 'New Room', add_room_path, method: :get%><br/>
+<%= button_to 'Go Back', options_path, method: :get%>

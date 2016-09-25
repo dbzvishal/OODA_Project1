@@ -10,6 +10,8 @@
           </ul>
         </div>
     <% end %>
+    <br/>
+    <h3><i>Please enter the room details below:</i></h3>
     <table>
       <tr>
         <td><%= f.label "Room Number" %></td>
@@ -26,9 +28,6 @@
         <td><%= select("room", "building_id", @buildings) %></td>
       </tr>
     <%end%>
-
-      <tr>
-        <td><%= f.submit 'Submit' %></td>
-      </tr>
-    </table>
+    </table><br/><br/>
+    <%= f.submit 'Create New Room' %>
 <% end %>

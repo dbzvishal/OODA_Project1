@@ -5,5 +5,4 @@
 <%end%>
 
 <%= render 'form', {user: @user, action: 'create'} %>
-<br />
-<%= button_to 'Back', login_path, :method => 'get' %>
+<div style="float: left; width: 50px"><%= button_to 'Go Back', options_path, :method => 'get' %></div>

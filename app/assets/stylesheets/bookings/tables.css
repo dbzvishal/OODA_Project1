@@ -4,3 +4,9 @@ table, th, td {
     padding-right: 10px;
     padding-left: 10px;
 }
+thead {
+    font-size: 25px;font-weight: bold;background-color: #333333;color:#FFFFFF;font-weight: bold;
+}
+tbody {
+    background-color: #eeeeee;
+}

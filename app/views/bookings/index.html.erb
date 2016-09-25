@@ -46,9 +46,9 @@
   </tbody>
 </table>
 <% else %>
-<i>No Bookings are made yet</i>
+<i>No bookings have been made yet</i>
 <% end %>
 <br>
 
-<%= link_to 'New Booking', add_booking_path %><br/><br/>
-<%= link_to 'Back to Dashboard', options_path %>
+<%= button_to 'New Booking', add_booking_path, method: :get%><br/><br/>
+<%= button_to 'Go Back', options_path, method: :get%>

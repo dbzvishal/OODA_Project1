@@ -1,13 +1,18 @@
 <%= stylesheet_link_tag 'bookings/tables' %>
-<p id="notice"><%= notice %></p>
+<p id="notice"><i><%= notice %></i></p>
 
-<p>
+<h1>Room Details</h1>
+<p style="font-size: 18px">
   <strong>Room number:</strong>
   <%= @room.rnumber %>
 </p>
-<p>
+<p style="font-size: 18px">
   <strong>Building:</strong>
   <%= @room.building.bname %>
+</p>
+<p style="font-size: 18px">
+  <strong>Size:</strong>
+  <%= Room.get_size_in_words @room.size %> (<%= @room.size %>)
 </p>
 
 <table>
@@ -47,4 +52,4 @@
   <% end %>
 </table>
 <br />
-<%= link_to '      Back', rooms_path %>
+<%= button_to 'Go Back', rooms_path, method: :get %>

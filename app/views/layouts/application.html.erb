@@ -2,18 +2,21 @@
 <html>
   <head>
     <title>Library Room Booking</title>
+
+    <p style = "border: 1px hidden;outline-style: hidden;background-color: #4682B4;font-size:25px;font-family:'Baskerville Old Face';color: chartreuse">
+      <br/><b>LIBRARY  ROOM  BOOKING</b><br/></p>
     <%= csrf_meta_tags %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag 'bookings/booking'%>
     <%= yield(:header) if content_for? :header %>
     <% unless session[:user_id].nil? %>
-      <h3 id='logout' name='logout' style="text-align: right; color: blue">
+      <h2 id='logout' name='logout' style="text-align: right; color: blue">
         <%= link_to 'Logout', logout_path %>
-      </h3>
+      </h2>
     <% end %>
   </head>
 
-  <body>
+  <body style ="background-color: ivory">
     <%= yield %>
   </body>
 </html>

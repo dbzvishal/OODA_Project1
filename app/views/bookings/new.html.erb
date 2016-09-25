@@ -5,8 +5,6 @@
     <p id="notice"><%= flash.notice %></p>
 <%end%>
 
-
-
 <%= render 'form', booking: @booking, action: 'create' %>
-
-<%= link_to 'Back', options_path%>
+<br/>
+<%= button_to 'Go Back', options_path, method: :get%>

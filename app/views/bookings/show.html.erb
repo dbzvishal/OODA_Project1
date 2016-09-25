@@ -1,10 +1,17 @@
 <%= stylesheet_link_tag 'bookings/tables' %>
-
+<h2>Booking History for User: <%= @user_name %></h2>
 <% unless @booking.empty? %>
-  <h3>Booking History for User: <%= @user_name %></h3>
+  <% i=0
+  @booking.each do |booking|
+  if(booking.timeto > @currentZone.at(Time.now))
+  i = i + 1
+  end
+  end %>
+  <% unless (i==0) %>
   <p id="notice"><%= notice %></p>
   <table style='text-align:center;vertical-align:middle'>
-    <tr style='font-size: 25px;font-weight: bold;background-color: #333333;color:#FFFFFF;font-weight: bold;'>
+    <thead>
+    <tr>
       <th></th>
       <th>Room</th>
       <th>Building</th>
@@ -12,6 +19,8 @@
       <th>Start Time</th>
       <th>End Time</th>
     </tr>
+    </thead>
+
     <% i=0
       @booking.each do |booking|
       if(booking.timeto > @currentZone.at(Time.now))
@@ -31,9 +40,10 @@
     <%end%>
   </table>
 <% else %>
-    <i>No Booking History found for user</i>
+    <i>No upcoming bookings found for user</i>
+<% end %>
 <% end %>
 <br />
 <br />
-<%= link_to 'New Booking', add_booking_path %><br /><br />
-<%= link_to 'Back to Dashboard', options_path%>
+<%= button_to 'New Booking', add_booking_path, method: :get%><br />
+<%= button_to 'Go Back', options_path, method: :get%>

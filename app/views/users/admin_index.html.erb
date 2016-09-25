@@ -2,7 +2,7 @@
     <%= stylesheet_link_tag 'bookings/tables' %>
 <% end -%>
 <p id="notice"><%= notice %></p>
-<h1>Users</h1>
+<h1>Administrators</h1>
 
 <table>
   <thead>
@@ -29,7 +29,6 @@
   <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New User', add_user_path %>
+<%= button_to 'New User', add_user_path, method: :get %><br/>
+<%= button_to 'Go Back', options_path, method: :get %>

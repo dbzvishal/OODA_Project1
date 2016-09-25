@@ -23,8 +23,11 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     # @admin = Booking.is_admin(session[:user_id])
     @users = User.all.collect {|p| [ p.uname, p.id ] }
-    @buildings = Building.all.collect {|p| [ p.bname, p.id] }
+    @buildings = Building.all.collect {|p| [ p.bname, p.id ] }
     @rooms = []
+
+    # Get the teams of that particular user
+    @teams = Team.joins(:teams_users).where('user_id = ?', session[:user_id]).collect { |p| [ p.name, p.id ] }
   end
 
   # GET /bookings/1/edit
@@ -40,6 +43,9 @@ class BookingsController < ApplicationController
     @booking.room_id = room_id
     if(@booking.user_id.nil?)
       @booking.user_id = session[:user_id]
+    end
+    if @booking.team_id == ''
+      @booking.team_id = nil
     end
     respond_to do |format|
 
@@ -61,7 +67,8 @@ class BookingsController < ApplicationController
           format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
         end
       else
-        format.html { redirect_to :new, alert: 'An error occurred and booking did not happen.' }
+        puts @booking.errors.full_messages
+        format.html { redirect_to add_booking_path, alert: 'An error occurred and booking did not happen.' }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -100,7 +107,7 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def booking_params
-    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :room_id, :room_radio)
+    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :team_id, :room_id, :room_radio)
   end
 
   def initial_val

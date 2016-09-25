@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925172830) do
+ActiveRecord::Schema.define(version: 20160925223146) do
 
   create_table "bookings", force: :cascade do |t|
-    t.datetime "timefrom"
-    t.datetime "timeto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "timefrom"
+    t.datetime "timeto"
     t.integer  "room_id"
     t.integer  "user_id"
+    t.integer  "team_id"
     t.index ["room_id"], name: "index_bookings_on_room_id"
+    t.index ["team_id"], name: "index_bookings_on_team_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -40,10 +42,17 @@ ActiveRecord::Schema.define(version: 20160925172830) do
   end
 
   create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
     t.integer "team_id"
+    t.integer "user_id"
     t.boolean "notification"
-    t.integer "users_id"
-    t.index ["users_id"], name: "index_teams_on_users_id"
+    t.index ["team_id"], name: "index_teams_users_on_team_id"
+    t.index ["user_id"], name: "index_teams_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

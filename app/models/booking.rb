@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :user
+  belongs_to :team, optional: true
 
   def self.get_user_bookings(user_id)
     @bookings = Booking.where("user_id = ?", user_id)

@@ -34,7 +34,7 @@
         <td><%= booking.timefrom.strftime("%d-%b-%y") %></td>
         <td><%= booking.timefrom.strftime("%I:%M %p") %></td>
         <td><%= booking.timeto.strftime("%I:%M %p") %></td>
-        <td><%= link_to 'Delete', bookings_destroy_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Release Booking', bookings_destroy_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <%end%>
     <%end%>

@@ -23,6 +23,12 @@
 
     <h3><i> Bookings can be made for at most two hours</i></h3>
     <br />
+
+    <div class="field">
+      <b><%= f.label 'Choose team: ' %></b>
+      <%= select("booking", "team_id", @teams, prompt: "None") %>
+    </div><br /><br />
+
     <div class="field">
       <b><%= f.label 'Select Date - Start Time' %></b>
       <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 1.week) %>

@@ -10,11 +10,10 @@ class ApplicationController < ActionController::Base
     @currentZone = ActiveSupport::TimeZone[@zone]
     Time.zone = @zone
     @admin = false
-    @super_admin = false
+    @super_admin = User.where('uname = ?',"SuperAdmin").first
     @user = User.find_by(id: session[:user_id])
     unless @user.nil?
       @admin = true if @user.utype == "admin"
-      @super_admin = true if @user.uname == "SuperAdmin"
     else if is_redirect == true
       redirect_to root_path, alert: "You are trying to access a page that requires authorization"
          end

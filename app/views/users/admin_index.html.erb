@@ -19,9 +19,11 @@
         <td><%= user.uname %></td>
         <td><%= user.uemail %></td>
         <td><%= link_to 'Show Booking History', show_booking_path(user) %></td>
+        <% unless user.id == @super_admin.id  %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <% unless user.id = session[:user_id] || @super_admin = true %>
-          <td><%= link_to 'Destroy', users_admin_index_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% unless user.id == session[:user_id] || user.id == @super_admin.id %>
+          <td><%= link_to 'Delete', users_admin_index_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
   <% end %>

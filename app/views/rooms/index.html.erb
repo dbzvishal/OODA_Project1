@@ -6,35 +6,6 @@
 
 <h1>Rooms</h1>
 
-<h2>Search Room by parameters</h2>
-<h4>Enter the following parameters:</h4>
-
-<%= form_tag(rooms_path, :method => "get", id: "search_form") do %>
-
-    <%= label_tag(:rnumber, "Room Number:") %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Room based on Room ID" %>
-    <br>
-
-   <%# <%= label_tag(:size,"Size:")
-    <%= select("room", "size", $room_sizes) %>
-    <%#<br>
-
-    <%# <%= label_tag(:bname,"Building:") %>
-    <%# <%= select("room", "building_id", @buildings) %>
-    <%# <br>
-
-    <%= label_tag(:status, "Status:  ") %>
-    <%# <td><%= select("room","status", %w[None Available Booked]) </td>%>
-    <br><br>
-
-    <%= submit_tag "Search" %>
-    <% end %>
-
-
-<br>
-<br>
-
-
 <table>
   <thead>
     <tr>

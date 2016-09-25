@@ -6,12 +6,12 @@ class RoomsController < ApplicationController
   def index
     @buildings = Building.all.select(:bname).collect do |x| x.bname end
     respond_to do |format|
-      format.html { render :index }
-
       # Applying search conditions
-      @rooms = Room.get_searched_rooms params
+      searched_rooms = Room.get_searched_rooms params
 
-      format.json { render json: @rooms }
+      format.json { render json: searched_rooms }
+      @room
+      format.html { render :index}
     end
   end
 

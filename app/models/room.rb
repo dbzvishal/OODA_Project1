@@ -40,7 +40,7 @@ class Room < ApplicationRecord
   def self.get_searched_rooms(params)
     rooms = nil
     if params['status'] != '-1'
-      cur_time = Time.now
+      cur_time = @currentZone.at(Time.now)
       if params['status'] == 'Booked'
         rooms = Room.joins(:building).joins(:bookings).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
       else

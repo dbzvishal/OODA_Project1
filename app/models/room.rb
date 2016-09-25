@@ -32,19 +32,14 @@ class Room < ApplicationRecord
     size
   end
 
-  def self.search(search)
-      where("rnumber LIKE ?", "%#{search}%")
-      #where("size LIKE ?", "%#{search}%")
-  end
-
   def self.get_searched_rooms(params)
     rooms = nil
     if params['status'] != '-1'
       cur_time = Time.now
-      if params['status'] == 'Booked'
-        rooms = Room.joins(:building).joins(:bookings).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
-      else
-        rooms = Room.joins(:building).joins(:bookings).where.not('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
+      rooms = Room.joins(:building).joins(:bookings).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
+      if params['status'] == 'Available'
+        room_arr = rooms.collect { |room| room.id}
+        rooms = Room.joins(:building).where('rooms.id NOT IN (?)', room_arr).group('rooms.id')
       end
     end
     if params['room_number'] != ''

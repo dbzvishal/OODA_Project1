@@ -59,12 +59,12 @@ class Room < ApplicationRecord
     if params['size_name'] != '-1'
       size = Room.get_size params['size_name']
       if rooms.nil?
-        rooms = Room.joins(:building).where('size = ?', size)
+        rooms = Room.joins(:building).where('size = ?', size).select('rooms.id', :rnumber, :bname, :size)
       else
-        rooms = rooms.where('size = ?', size)
+        rooms = rooms.where('size = ?', size).select('rooms.id', :rnumber, :bname, :size)
       end
     end
-    rooms = Room.joins(:building).all if rooms.nil?
+    rooms = Room.joins(:building).select('rooms.id', :rnumber, :bname, :size).all if rooms.nil?
 
     rooms
   end

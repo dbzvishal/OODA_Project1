@@ -36,24 +36,24 @@ class Room < ApplicationRecord
     rooms = nil
     if params['status'] != '-1'
       cur_time = Time.now
-      rooms = Room.joins(:building).joins(:bookings).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
+      rooms = Room.joins(:building).joins(:bookings).select('rooms.id', :rnumber, :bname, :size).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group(['rooms.id', 'rooms.rnumber','buildings.bname', 'rooms.size'])
       if params['status'] == 'Available'
         room_arr = rooms.collect { |room| room.id}
-        rooms = Room.joins(:building).where('rooms.id NOT IN (?)', room_arr).group('rooms.id')
+        rooms = Room.joins(:building).select('rooms.id', :rnumber, :bname, :size).where('rooms.id NOT IN (?)', room_arr).group(['rooms.id', 'rooms.rnumber','buildings.bname', 'rooms.size'])
       end
     end
     if params['room_number'] != ''
       if rooms.nil?
-        rooms = Room.joins(:building).where('rnumber like ?', "%#{params['room_number']}%")
+        rooms = Room.joins(:building).select('rooms.id', :rnumber, :bname, :size).where('rnumber like ?', "%#{params['room_number']}%")
       else
-        rooms = rooms.where('rnumber like ?', "%#{params['room_number']}%")
+        rooms = rooms.select('rooms.id', :rnumber, :bname, :size).where('rnumber like ?', "%#{params['room_number']}%")
       end
     end
     if params['building_name'] != '-1'
       if rooms.nil?
-        rooms = Room.joins(:building).where('building_id = ?', params['building_name'])
+        rooms = Room.joins(:building).select('rooms.id', :rnumber, :bname, :size).where('building_id = ?', params['building_name'])
       else
-        rooms = rooms.where('building_id = ?', params['building_name'])
+        rooms = rooms.select('rooms.id', :rnumber, :bname, :size).where('building_id = ?', params['building_name'])
       end
     end
     if params['size_name'] != '-1'
@@ -66,7 +66,6 @@ class Room < ApplicationRecord
     end
     rooms = Room.joins(:building).all if rooms.nil?
 
-    rooms = rooms.select('rooms.id', :rnumber, :bname, :size)
     rooms
   end
 end

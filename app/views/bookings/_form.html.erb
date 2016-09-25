@@ -11,17 +11,6 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <b><%= f.label :building %></b>
-      <%= select("building", "id", @buildings, :prompt => 'Choose Building') %>
-    </div><br/>
-
-    <div class="field">
-      <b><%= f.label :room %></b>
-      <%= select("booking", "room_id", @rooms) %>
-    </div>
-    <br/>
-
     <% if (@admin) %>
         <% unless @users.nil? %>
             <div class="field">
@@ -44,19 +33,56 @@
       <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 2.weeks) %>
     </div><br/>
 
-    <div class="actions">
-      <%= f.submit %>
+    <div class="field">
+      <b><%= f.label 'Enter Search Parameters: ' %></b>
+      <input type="text" id="room_number" name="room_number" placeholder="Room number"/>
+      <select type="text" id="building_name" name="building_name">
+        <option value="-1">Choose Building...</option>
+        <%
+          @buildings.each do |name, id|
+        %> <option value="<%= id %>"><%= name %></option>
+          <%end%>
+      </select>
+
+      <select type="text" id="size_name" name="size_name">
+        <option value="-1">Choose size...</option>
+        <%
+          $room_sizes.each do |size|
+        %> <option value="<%= size %>"><%= size %></option>
+        <%end%>
+      </select>
+
+      <select type="text" id="status" name="status">
+        <option value="-1">Choose status...</option>
+        <option value="Available">Available</option>
+        <option value="Booked">Booked</option>
+      </select>
+    </div>
+
+    <input type="submit" onclick="getRoomsData();return false"/>
+    <br /><br />
+
+    <table id="search_table" style="display: none">
+      <tr id="no_delete">
+        <th></th>
+        <th>Room Number</th>
+        <th>Building</th>
+        <th>Size</th>
+      </tr>
+    </table>
+
+    <br />
+    <div class="actions" style="display: none" id="submit_button">
+      <%= f.submit "Book the Room" %>
     </div>
 <% end %>
 <br/>
 
 
 <% content_for :header do -%>
-    <%= javascript_include_tag 'bookings/bookings'%>
+    <%= javascript_include_tag 'bookings/booking'%>
 <% end -%>
 <script>
   $('.actions').find('input').removeAttr('data-disable-with');
   $('.actions').find('input').removeAttr('disabled');
-  $('#building_id').on('change', retrieve_rooms);
-  retrieve_rooms();
 </script>

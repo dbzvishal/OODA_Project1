@@ -36,7 +36,7 @@ class Room < ApplicationRecord
     rooms = nil
     if params['status'] != '-1'
       cur_time = Time.now
-      rooms = Room.joins(:building).joins(:bookings).select('rooms.id', :rnumber, :bname, :size).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group(['rooms.id', 'rooms.rnumber','buildings.bname', 'rooms.size'])
+        rooms = Room.joins(:building).left_outer_joins(:bookings).select('rooms.id', :rnumber, :bname, :size).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group(['rooms.id', 'rooms.rnumber','buildings.bname', 'rooms.size'])
       if params['status'] == 'Available'
         room_arr = rooms.collect { |room| room.id}
         rooms = Room.joins(:building).select('rooms.id', :rnumber, :bname, :size).where('rooms.id NOT IN (?)', room_arr).group(['rooms.id', 'rooms.rnumber','buildings.bname', 'rooms.size'])

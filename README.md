@@ -18,16 +18,16 @@ Administrators can manage rooms, manage the user details and manage the bookings
 
 * Deployment instructions
 
-The App has been deployed on Heroku 
-accessible from the below link-
+    The App has been deployed on Heroku 
+    accessible from the below link-
 
 https://ooda-library-proj.herokuapp.com/
 
 * Administrator Credentials
 
-Username: SuperAdmin
+    Username: SuperAdmin
 
-Password: admin
+    Password: admin
 
 Additional Information for the Users
 ==========================================
@@ -42,7 +42,10 @@ Additional Information for the Users
 For any other details: 
 
 Contact:
+
 Vishal, vmuruga@ncsu.edu
+
 Ashima, ashima26@ncsu.edu
+
 Spondon, skundu@ncsu.edu
 

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :bookings
+  has_many :bookings, :dependent => :delete_all
 
   def setMember
     self.utype = 'member'

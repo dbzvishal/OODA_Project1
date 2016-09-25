@@ -6,14 +6,15 @@
 <p><%= link_to 'Book a Room', add_booking_path %> </p>
   <p><%= link_to 'My Bookings', user_bookings_path %> </p>
   <p><%= link_to 'My Profile', users_path %></p>
+  <p><%= link_to 'Team Members', users_path %></p>
 <%if(@admin)%>
-<h2>Administrative Actions</h2>
-  <p><%= link_to 'Add a new room', add_room_path %> </p>
-  <p><%= link_to 'Manage rooms', rooms_path %> </p>
-  <p><%= link_to 'Manage bookings', bookings_path %></p>
-  <p><%= link_to 'Add a new user', add_user_path %> </p>
-  <p><%= link_to 'View Library Members', users_index_path %> </p>
-  <p><%= link_to 'View Admins', users_admin_index_path %> </p>
+  <h2>Administrative Actions</h2>
+    <p><%= link_to 'Add a new room', add_room_path %> </p>
+    <p><%= link_to 'Manage rooms', rooms_path %> </p>
+    <p><%= link_to 'Manage bookings', bookings_path %></p>
+    <p><%= link_to 'Add a new user', add_user_path %> </p>
+    <p><%= link_to 'View Library Members', users_index_path %> </p>
+    <p><%= link_to 'View Admins', users_admin_index_path %> </p>
 <%end%>
 </div>
 

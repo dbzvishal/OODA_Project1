@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923041645) do
+ActiveRecord::Schema.define(version: 20160925172830) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "timefrom"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20160923041645) do
     t.string   "status"
     t.integer  "building_id"
     t.index ["building_id"], name: "index_rooms_on_building_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer "team_id"
+    t.boolean "notification"
+    t.integer "users_id"
+    t.index ["users_id"], name: "index_teams_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|

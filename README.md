@@ -26,6 +26,7 @@ https://ooda-library-proj.herokuapp.com/
 * Administrator Credentials
 
 Username: SuperAdmin
+
 Password: admin
 
 Additional Information for the Users

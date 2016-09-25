@@ -36,4 +36,42 @@ class Room < ApplicationRecord
       where("rnumber LIKE ?", "%#{search}%")
       #where("size LIKE ?", "%#{search}%")
   end
+
+  def self.get_searched_rooms(params)
+    rooms = nil
+    if params['status'] != '-1'
+      cur_time = Time.now
+      if params['status'] == 'Booked'
+        rooms = Room.joins(:building).joins(:bookings).where('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
+      else
+        rooms = Room.joins(:building).joins(:bookings).where.not('timefrom <= ? and timeto > ?', cur_time, cur_time).group('rooms.id')
+      end
+    end
+    if params['room_number'] != ''
+      if rooms.nil?
+        rooms = Room.joins(:building).where('rnumber like ?', "%#{params['room_number']}%")
+      else
+        rooms = rooms.where('rnumber like ?', "%#{params['room_number']}%")
+      end
+    end
+    if params['building_name'] != '-1'
+      if rooms.nil?
+        rooms = Room.joins(:building).where('building_id = ?', params['building_name'])
+      else
+        rooms = rooms.where('building_id = ?', params['building_name'])
+      end
+    end
+    if params['size_name'] != '-1'
+      size = Room.get_size params['size_name']
+      if rooms.nil?
+        rooms = Room.joins(:building).where('size = ?', size)
+      else
+        rooms = rooms.where('size = ?', size)
+      end
+    end
+    rooms = Room.joins(:building).all if rooms.nil?
+
+    rooms = rooms.select('rooms.id', :rnumber, :bname, :size)
+    rooms
+  end
 end

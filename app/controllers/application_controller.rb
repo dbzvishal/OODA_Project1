@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :logoutAuth
+
+  $room_sizes = %w[Small Medium Large]
+
   protected
   def logoutAuth(is_redirect=true)
     @zone='Eastern Time (US & Canada)'
@@ -11,7 +14,7 @@ class ApplicationController < ActionController::Base
     @user = User.find_by(id: session[:user_id])
     unless @user.nil?
       @admin = true if @user.utype == "admin"
-      @super_admin = true if @user.utype == "SuperAdmin"
+      @super_admin = true if @user.uname == "SuperAdmin"
     else if is_redirect == true
       redirect_to root_path, alert: "You are trying to access a page that requires authorization"
          end

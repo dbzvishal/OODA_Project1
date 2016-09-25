@@ -34,7 +34,10 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    room_id = params['room_radio']
+    @room = Room.find(room_id)
     @booking = Booking.new(booking_params)
+    @booking.room_id = room_id
     if(@booking.user_id.nil?)
       @booking.user_id = session[:user_id]
     end
@@ -97,7 +100,7 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def booking_params
-    params.require(:booking).permit(:date, :timefrom, :timeto, :user_id, :room_id, :building_id )
+    params.require(:booking).permit(:date, :timefrom, :timeto, :room_id, :room_radio)
   end
 
   def initial_val
@@ -110,15 +113,15 @@ class BookingsController < ApplicationController
     response_str = '';
     if (@booking.timeto < @booking.timefrom)
       response_str = 'End time must be greater than start time'
-    elsif @booking.timefrom < DateTime.now
+    elsif @booking.timefrom < @currentZone.at(Time.now)
       response_str = 'Start time cannot be lesser than current time'
     elsif @booking.timeto == @booking.timefrom
       response_str = 'Start time cannot be equal to End time'
     elsif @booking.timeto - @booking.timefrom > 2.hours
       response_str = 'Room cannot be booked for more than 2 hours'
-    elsif @booking.timeto - DateTime.now > 2.weeks
-      response_str = 'Room cannot be booked ahead of 2 weeks'
-    elsif @booking.is_booked?(params['building']['id'])
+    elsif @booking.timeto - @currentZone.at(Time.now) > 1.weeks
+      response_str = 'Room cannot be booked ahead of a week'
+    elsif @booking.is_booked? @room.building_id
       response_str = 'The room is already booked for the specified time'
     end
     @bookings_user = Booking.get_user_bookings(@booking.user_id)

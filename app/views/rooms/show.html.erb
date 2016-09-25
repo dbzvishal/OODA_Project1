@@ -23,12 +23,12 @@
       end
     %>
   </tr>
-  <% 14.times.each do %>
+  <% 7.times.each do %>
     <tr>
       <td><%= @cur_date %></td>
       <%
         epoch_time = @cur_date.to_time.to_i
-        time = @currentZone.at(Time.at(epoch_time).at_midnight)
+        time = @currentZone.at(Time.at(epoch_time)).at_midnight
         time_next_day = time + 1.day
         while time < time_next_day
       %>

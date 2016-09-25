@@ -1,12 +1,18 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
-  $room_sizes = %w[Small Medium Large]
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
     @buildings = Building.all.select(:bname).collect do |x| x.bname end
+    respond_to do |format|
+      # Applying search conditions
+      searched_rooms = Room.get_searched_rooms params
+
+      format.json { render json: searched_rooms }
+      @rooms = Room.all
+      format.html { render :index}
+    end
   end
 
   # GET /rooms/1

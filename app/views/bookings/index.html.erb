@@ -32,7 +32,7 @@
         <%else%>
             <td><%=  %></td>
         <%end%>
-        <%unless booking.room.building.nil? %>
+        <%unless (booking.room.nil? || booking.room.building.nil?) %>
             <td><%= booking.room.building.bname %></td>
         <%else%>
             <td><%=  %></td>

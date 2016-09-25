@@ -19,7 +19,7 @@ Administrators can manage rooms, manage the user details and manage the bookings
 * Deployment instructions
 
 The App has been deployed on Heroku 
-Accessible by the below link-
+accessible from the below link-
 
 https://ooda-library-proj.herokuapp.com/
 

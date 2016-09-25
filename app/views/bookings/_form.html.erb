@@ -25,12 +25,12 @@
     <br />
     <div class="field">
       <b><%= f.label 'Select Date - Start Time' %></b>
-      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 2.weeks) %>
+      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 1.week) %>
     </div><br/>
 
     <div class="field">
       <b><%= f.label 'Select Date - End Time' %></b>
-      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 2.weeks) %>
+      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 1.week) %>
     </div><br/>
 
     <div class="field">

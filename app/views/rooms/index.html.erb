@@ -23,7 +23,7 @@
         <td><%= room.building.bname %></td>
         <td><%= Room.get_size_in_words room.size %> (<%= room.size %>)</td>
         <td> <%= link_to 'Show', show_room_path(room.id) %></td>
-        <td> <%= link_to 'Delete', rooms_destroy_path(room.rnumber), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td> <%= link_to 'Delete', rooms_destroy_path(room.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
 </table>

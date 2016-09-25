@@ -35,4 +35,10 @@ Additional Information for the Users
 6. A user can search the rooms based on building, size, status(available or booked) and Room number.
 7. When booking is done, the user can logout from the application.
 
+For any other details: 
+
+Contact:
+Vishal, vmuruga@ncsu.edu
+Ashima, ashima26@ncsu.edu
+Spondon, skundu@ncsu.edu
 

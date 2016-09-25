@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
       searched_rooms = Room.get_searched_rooms params
 
       format.json { render json: searched_rooms }
-      @room
+      @rooms = Room.all
       format.html { render :index}
     end
   end

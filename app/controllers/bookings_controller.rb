@@ -23,8 +23,11 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     # @admin = Booking.is_admin(session[:user_id])
     @users = User.all.collect {|p| [ p.uname, p.id ] }
-    @buildings = Building.all.collect {|p| [ p.bname, p.id] }
+    @buildings = Building.all.collect {|p| [ p.bname, p.id ] }
     @rooms = []
+
+    # Get the teams of that particular user
+    @teams = Team.joins(:teams_users).where('user_id = ?', session[:user_id]).collect { |p| [ p.name, p.id ] }
   end
 
   # GET /bookings/1/edit
@@ -41,6 +44,9 @@ class BookingsController < ApplicationController
     if(@booking.user_id.nil?)
       @booking.user_id = session[:user_id]
     end
+    if @booking.team_id == ''
+      @booking.team_id = nil
+    end
     respond_to do |format|
 
       # Validation
@@ -52,6 +58,11 @@ class BookingsController < ApplicationController
       end
 
       if @booking.save
+
+        unless @booking.team_id.nil?
+          notify_team_members
+        end
+
         if @admin
           user_id = @booking.user_id
           @booking = Booking.get_user_bookings user_id
@@ -61,7 +72,8 @@ class BookingsController < ApplicationController
           format.html { redirect_to user_bookings_path, notice: 'Booking was successfully created.' }
         end
       else
-        format.html { redirect_to :new, alert: 'An error occurred and booking did not happen.' }
+        puts @booking.errors.full_messages
+        format.html { redirect_to add_booking_path, alert: 'An error occurred and booking did not happen.' }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -92,21 +104,27 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
 
   def set_booking
     @booking = Booking.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def booking_params
-    params.require(:booking).permit(:timefrom, :timeto, :user_id, :room_id)
+    params.require(:booking).permit(:timefrom, :timeto, :user_id, :team_id, :room_id)
   end
 
   def initial_val
     @users = User.all.collect {|p| [ p.uname, p.id ] }
     @buildings = Building.all.collect {|p| [ p.bname, p.id] }
     @rooms = []
+  end
+
+  def notify_team_members
+    user_ids = User.get_users_of_team @booking.team_id
+    user_and_team_info = @booking.user_id.to_s + "-" + @booking.team_id.to_s
+    User.where('id in (?)', user_ids).update_all(notification: user_and_team_info)
   end
 
   def validate

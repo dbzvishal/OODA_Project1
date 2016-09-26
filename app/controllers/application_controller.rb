@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
     @zone='Eastern Time (US & Canada)'
     @currentZone = ActiveSupport::TimeZone[@zone]
     Time.zone = @zone
+    if Rails.env.test?
+      return
+    end
     @admin = false
     @super_admin = User.where('uname = ?',"SuperAdmin").first
     @user = User.find_by(id: session[:user_id])

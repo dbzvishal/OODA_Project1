@@ -58,6 +58,9 @@ class BookingsController < ApplicationController
       end
 
       if @booking.save
+
+        notify_team_members
+
         if @admin
           user_id = @booking.user_id
           @booking = Booking.get_user_bookings user_id
@@ -114,6 +117,11 @@ class BookingsController < ApplicationController
     @users = User.all.collect {|p| [ p.uname, p.id ] }
     @buildings = Building.all.collect {|p| [ p.bname, p.id] }
     @rooms = []
+  end
+
+  def notify_team_members
+    user_ids = User.get_users_of_team @booking.team_id
+    User.where('id in (?)', user_ids).update_all(notification: true)
   end
 
   def validate

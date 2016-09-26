@@ -22,6 +22,11 @@ class User < ApplicationRecord
   def self.get_user userinfo
     return User.where('uname = ? or uemail = ?', userinfo, userinfo).first
   end
+  def self.get_users_of_team team_id
+    list = User.joins(:teams).where('team_id = ?', team_id).collect { |x| x.id}
+    return list
+  end
+
   def is_user_in_team? team_id
     return !(User.joins(:teams).where('user_id = ? and team_id = ?', self.id, team_id).empty?)
   end

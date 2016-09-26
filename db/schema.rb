@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925223146) do
+ActiveRecord::Schema.define(version: 20160926015946) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20160925223146) do
   create_table "teams_users", id: false, force: :cascade do |t|
     t.integer "team_id"
     t.integer "user_id"
-    t.boolean "notification"
     t.index ["team_id"], name: "index_teams_users_on_team_id"
     t.index ["user_id"], name: "index_teams_users_on_user_id"
   end
@@ -59,9 +58,10 @@ ActiveRecord::Schema.define(version: 20160925223146) do
     t.string   "uname"
     t.string   "uemail"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "utype"
+    t.boolean  "notification"
   end
 
 end

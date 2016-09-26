@@ -55,6 +55,11 @@ Rails.application.routes.draw do
   # Get list of rooms from Building
   get '/buildings/:id', to: 'buildings#show', as: 'show_building'
 
+  # Show new page for creating team members
+  get '/team/new', to: 'team#new', as: 'add_team'
+  # Create team member
+  post '/team/create', to: 'team#create', as: 'create_team'
+
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'
 

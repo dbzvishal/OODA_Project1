@@ -4,6 +4,9 @@
 <% if flash.notice%>
     <p id="notice"><%= flash.notice %></p>
 <%end%>
+<% if flash.alert%>
+    <p id="notice"><%= flash.alert %></p>
+<%end%>
 
 <%= render 'form', booking: @booking, action: 'create' %>
 <br/>

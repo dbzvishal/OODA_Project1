@@ -1,0 +1,9 @@
+<h1>Create New Team</h1>
+
+<% if flash[:alert]%>
+    <p id="notice"><%= flash[:alert] %></p>
+<%end%>
+
+<%= render 'form', {team: @team, action: 'create'}%>
+<br />
+<%= button_to 'Go Back', options_path, method: :get%>

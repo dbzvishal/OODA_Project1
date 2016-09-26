@@ -16,4 +16,13 @@ class User < ApplicationRecord
     @admins = User.all.select {|useradmin| useradmin.utype == "admin"}
     @admins
   end
+  def self.does_user_exist? userinfo
+    return !(User.where('uname = ? or uemail = ?', userinfo, userinfo).empty?)
+  end
+  def self.get_user userinfo
+    return User.where('uname = ? or uemail = ?', userinfo, userinfo).first
+  end
+  def is_user_in_team? team_id
+    return !(User.joins(:teams).where('user_id = ? and team_id = ?', self.id, team_id).empty?)
+  end
 end

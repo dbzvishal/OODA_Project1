@@ -1,0 +1,26 @@
+<%= form_for team, :url => {:action => action} do |f| %>
+    <% if team.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(team.errors.count, "error") %> prohibited this building from being saved:</h2>
+
+          <ul>
+            <% team.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <h3><i>Please enter the room details below:</i></h3>
+    <table>
+      <tr>
+        <td><%= f.label "Team Name" %></td>
+        <td><%= select("team", "id", @team_names, prompt: "Choose existing teamname ") %>
+        <%= f.text_field :name, placeholder: "Enter new teamname here" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "Username of teammate" %></td>
+        <td><input type="text" name="uname" id="uname" /></td>
+      </tr>
+    </table><br/>
+    <%= f.submit 'Submit'%>
+<% end %>

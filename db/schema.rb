@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926015946) do
+ActiveRecord::Schema.define(version: 20160926022745) do
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160926015946) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "utype"
-    t.boolean  "notification"
+    t.string   "notification"
   end
 
 end

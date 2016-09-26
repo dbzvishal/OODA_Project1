@@ -59,7 +59,9 @@ class BookingsController < ApplicationController
 
       if @booking.save
 
-        notify_team_members
+        unless @booking.team_id.nil?
+          notify_team_members
+        end
 
         if @admin
           user_id = @booking.user_id
@@ -121,7 +123,8 @@ class BookingsController < ApplicationController
 
   def notify_team_members
     user_ids = User.get_users_of_team @booking.team_id
-    User.where('id in (?)', user_ids).update_all(notification: true)
+    user_and_team_info = @booking.user_id.to_s + "-" + @booking.team_id.to_s
+    User.where('id in (?)', user_ids).update_all(notification: user_and_team_info)
   end
 
   def validate

@@ -26,6 +26,21 @@ class User < ApplicationRecord
     list = User.joins(:teams).where('team_id = ?', team_id).collect { |x| x.id}
     return list
   end
+  def self.is_notification_needed? user_id
+    !User.find(user_id).notification.nil?
+  end
+  def self.get_notification_data_and_clear user_id
+    user_obj = User.find(user_id)
+    notification = user_obj.notification.to_s
+    notification.split '-'
+    uname = User.find(notification.first).uname
+    tname = Team.find(notification.last).name
+
+    # Clearing the notification
+    user_obj.update(notification: nil)
+
+    [uname, tname]
+  end
 
   def is_user_in_team? team_id
     return !(User.joins(:teams).where('user_id = ? and team_id = ?', self.id, team_id).empty?)

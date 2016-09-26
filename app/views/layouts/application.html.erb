@@ -13,6 +13,12 @@
       <h2 id='logout' name='logout' style="text-align: right; color: blue">
         <%= link_to 'Logout', logout_path %>
       </h2>
+        <%
+          if User.is_notification_needed? session[:user_id]
+            user_and_team = User.get_notification_data_and_clear session[:user_id]
+        %>
+            <p style="text-align:center;">A room was booked by '<%= user_and_team.first %>' for the team '<%= user_and_team.last %>'</p>
+        <% end %>
     <% end %>
   </head>
 

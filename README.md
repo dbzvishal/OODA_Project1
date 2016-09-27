@@ -48,7 +48,7 @@ Bonus Features
    Once a user has been added to the team, a notification in the form of popup appears 
    which confirms the user has been added to the team.
    
-   Other invited members can select the teamname and view the other members as part of your common team.
+   Other invited members can go to Bookings and can check the booking for your team.
    
 2. A library user can only make one reservation in a particular date and time. Only after the booking is released/ reservation is cancelled, the user can proceed to make another booking.
 

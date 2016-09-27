@@ -45,7 +45,7 @@ Contact:
 
 Vishal, vmuruga@ncsu.edu
 
-Ashima, ashima26@ncsu.edu
+Ashima, asingh26@ncsu.edu
 
 Spondon, skundu@ncsu.edu
 

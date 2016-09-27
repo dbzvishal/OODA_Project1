@@ -57,11 +57,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.uname == 'SuperAdmin'
+        flash[:alert] = 'SuperAdmin cannot be updated.'
+        format.html { redirect_to action: 'edit'}
+      elsif @user.update(user_params)
         format.html { redirect_to users_path, notice: 'Successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        flash[:alert] = 'Error occurred'
+        format.html { redirect_to action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

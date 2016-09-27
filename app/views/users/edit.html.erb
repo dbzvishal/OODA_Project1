@@ -1,4 +1,8 @@
 <h1>Editing User</h1>
 
+<% if flash[:alert]%>
+    <p id="notice"><%= flash[:alert] %></p>
+<%end%>
+
 <%= render 'form', {user: @user, action: 'update'}  %>
 <div style="float: left; width: 50px"><%= button_to 'Go Back', options_path, :method => 'get' %></div>

@@ -8,3 +8,5 @@
 User.create(uname: 'SuperAdmin', password: 'admin', utype: 'admin')
 Building.create(bname: 'D.H.Hill')
 Building.create(bname: 'James.B.Hunt')
+Room.create(rnumber: '101A', size: '4', status: 'available', building_id: 1)
+Room.create(rnumber: '101B', size: '4', status: 'available', building_id: 2)

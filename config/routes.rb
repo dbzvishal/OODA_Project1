@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get '/team/new', to: 'team#new', as: 'add_team'
   # Create team member
   post '/team/create', to: 'team#create', as: 'create_team'
+  #
 
   # Logout page
   get '/logout', to: 'login#destroy', as: 'logout'

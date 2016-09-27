@@ -30,7 +30,7 @@ https://ooda-library-proj.herokuapp.com/
     Password: admin
     
     P.S. DO NOT CHANGE THE ADMIN CREDENTIALS, this will be of inconvenience to other reviewers of this project.
-         If you are considering to change it, please replace it by gthe original value after your testing.
+         If you are considering to change it, please replace it by the original value after your testing.
 
 Additional Information for the Users
 ==========================================

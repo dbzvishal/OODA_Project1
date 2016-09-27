@@ -28,6 +28,9 @@ https://ooda-library-proj.herokuapp.com/
     Username: SuperAdmin
 
     Password: admin
+    
+    P.S. DO NOT CHANGE THE ADMIN CREDENTIALS, this will be of inconvenience to other reviewers of this project.
+         If you are considering to change it, please replace it by gthe original value after your testing.
 
 Additional Information for the Users
 ==========================================
@@ -38,6 +41,18 @@ Additional Information for the Users
 5. Click on the Room to see the timeslots the room is booked.
 6. A user can search the rooms based on building, size, status(available or booked) and Room number.
 7. When booking is done, the user can logout from the application.
+
+Bonus Features
+=============================================
+1. A user can add team members by knowing their usernames beforehand.
+   Once a user has been added to the team, a notification in the form of popup appears 
+   which confirms the user has been added to the team.
+   
+   Other invited members can select the teamname and view the other members as part of your common team.
+   
+2. A library user can only make one reservation in a particular date and time. Only after the booking is released/ reservation is cancelled, the user can proceed to make another booking.
+
+However the Admin has been given the privileges to book multiple rooms on behalf of the user at a particular data and time.
 
 For any other details: 
 

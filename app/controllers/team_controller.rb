@@ -31,8 +31,11 @@ class TeamController < ApplicationController
       end
     else
       # Adding new user to new team after creating new team.
-      unless User.does_user_exist? name
+      if !User.does_user_exist? name
         redirect_to add_team_path, alert: 'User does not exist.'
+        return
+      elsif Team.is_team_name_taken? new_team_name
+        redirect_to add_team_path, alert: 'Team name is already taken'
         return
       else
         @team = Team.create

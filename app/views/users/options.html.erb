@@ -7,7 +7,7 @@
   <p><%= link_to 'My Bookings', user_bookings_path %> </p>
   <p><%= link_to 'My Profile', users_path %></p>
   <p><%= link_to 'Add Team Members', add_team_path %></p>
-  <p><%= link_to 'View Team Members', add_team_path %></p>
+  <p><%= link_to 'View Team Members', show_team_path(session[:user_id]) %></p>
 <%if(@admin)%>
   <h2>Administrative Actions</h2>
     <p><%= link_to 'Add a new room', add_room_path %> </p>

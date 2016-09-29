@@ -1,4 +1,5 @@
 class TeamController < ApplicationController
+  before_action :set_team, only: [:show]
 
   def new
     @team = Team.new
@@ -48,5 +49,14 @@ class TeamController < ApplicationController
 
     new
     render add_team_path
+  end
+
+  def show
+  end
+
+  private
+  def set_team
+    user = User.find(params[:id])
+    @teams = user.teams
   end
 end

@@ -1,0 +1,30 @@
+<% content_for :header do -%>
+    <%= stylesheet_link_tag 'bookings/tables' %>
+<% end -%>
+
+<table>
+  <% if @teams.empty? %>
+    No team
+  <% else %>
+      <tr>
+        <th>Team name</th>
+        <th>User name</th>
+        <th>Email</th>
+      </tr>
+      <%
+        @teams.each do |team|
+          team.users.each do |user|
+      %>
+        <tr>
+          <td><%= team.name %></td>
+          <td><%= user.uname %></td>
+          <td><%= user.uemail %></td>
+        </tr>
+      <%
+          end
+        end
+      %>
+  <%end%>
+</table>
+<br />
+<%= button_to 'Go Back', options_path, method: :get%>

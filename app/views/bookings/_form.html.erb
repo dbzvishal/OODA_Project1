@@ -30,16 +30,6 @@
     </div><br /><br />
 
     <div class="field">
-      <b><%= f.label 'Select Date - Start Time' %></b>
-      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 1.week) %>
-    </div><br/>
-
-    <div class="field">
-      <b><%= f.label 'Select Date - End Time' %></b>
-      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 1.week) %>
-    </div><br/>
-
-    <div class="field">
       <b><%= f.label 'Enter Search Parameters: ' %></b>
       <input type="text" id="room_number" name="room_number" placeholder="Room number"/>
       <select type="text" id="building_name" name="building_name">
@@ -75,6 +65,16 @@
         <th>Size</th>
       </tr>
     </table><br/>
+
+    <div class="field">
+      <b><%= f.label 'Select Date - Start Time' %></b>
+      <%= f.datetime_select :timefrom, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now)+ 1.week) %>
+    </div><br/>
+
+    <div class="field">
+      <b><%= f.label 'Select Date - End Time' %></b>
+      <%= f.datetime_select :timeto, discard_year: true, :minute_step => 30, min: Date.today, max: (@currentZone.at(Time.now) + 1.week) %>
+    </div><br/>
     <div class="actions" style="display: none" id="submit_button">
       <%= f.submit "Book the Room" %>
     </div>

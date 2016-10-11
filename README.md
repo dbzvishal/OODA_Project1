@@ -31,9 +31,21 @@ https://ooda-library-proj.herokuapp.com/
     
     P.S. DO NOT CHANGE THE ADMIN CREDENTIALS, this will be of inconvenience to other reviewers of this project.
          If you are considering to change it, please replace it by the original value after your testing.
+         
+Information for Admins
+===================================================================
+If you log in as a normal admin, you have the following features
+
+1. Create new admins (First you need to sign up the user and then use an admin to search the email and grant the upgrade process.)
+2. View the list of all admins and their profile details (except password);
+3. Delete admins (except herself/himself and the preconfigured Admin);
+4. Manage rooms. Including add room, view lists of all rooms, view details of a room, edit the details of a room, view booking story of a room and delete a room from system.
+5. Manage library members. Including view list of library members and profile details, view the reservation history of a library    member, and delete a library member.
+6. The admin can cancel users' bookings by selecting the user or the concerned room.
+         
 
 Additional Information for the Users
-==========================================
+===================================================================
 1. For first time users, press REGISTER and sign up using an username, email-id and a password in the first login page.
 2. For returning users, sign in with your chosen username and password.
 3. The user will have the option of Booking a room, view his Booking History and Edit his/her profile.
